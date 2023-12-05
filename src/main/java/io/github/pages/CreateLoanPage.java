@@ -4,11 +4,8 @@
  */
 package io.github.pages;
 
-import io.github.entities.Loan;
 import io.github.service.LoanService;
 import io.github.service.impl.LoanServiceImpl;
-
-import java.util.concurrent.atomic.LongAccumulator;
 
 /**
  *

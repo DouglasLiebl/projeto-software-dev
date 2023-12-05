@@ -10,11 +10,12 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService {
 
     @Override
-    public Movie register(Movie request) throws Exception {
+    public void register(Movie request) throws Exception {
         MovieRepository repository = getMovieRepository();
+        stringValidation(request.getName());
+        stringValidation(request.getDirector());
         repository.insertMovie(request);
 
-        return repository.getMovieByName(request.getName());
     }
 
     @SneakyThrows
@@ -47,6 +48,12 @@ public class MovieServiceImpl implements MovieService {
 
     private static MovieRepository getMovieRepository() {
         return new MovieRepository();
+    }
+
+    private static void stringValidation(String request) throws Exception {
+        if (request.isEmpty()) throw new Exception("Nomes não podem estar em branco.");
+        if (request.isBlank()) throw new Exception("Nomes não podem ser vazios.");
+        if (request.equals("null")) throw new Exception("Nomes não podem ser nulos");
     }
 
 }

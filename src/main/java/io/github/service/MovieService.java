@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MovieService {
 
-    Movie register(Movie request) throws Exception;
+    void register(Movie request) throws Exception;
 
     List<Movie> getAll();
 

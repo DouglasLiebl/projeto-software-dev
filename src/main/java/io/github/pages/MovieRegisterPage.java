@@ -10,6 +10,8 @@ import io.github.enums.Rating;
 import io.github.service.MovieService;
 import io.github.service.impl.MovieServiceImpl;
 
+import javax.swing.*;
+
 /**
  *
  * @author dougl
@@ -37,7 +39,6 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jLabelCadastrarFilme = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabelNome = new javax.swing.JLabel();
-        jTextFieldDescription = new javax.swing.JTextField();
         jFormattedTextFieldReleaseDate = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxGenre = new javax.swing.JComboBox<>();
@@ -52,6 +53,8 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jButtonSave = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -66,6 +69,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(500, 200));
+        setUndecorated(true);
 
         kGradientPanel1.setkEndColor(new java.awt.Color(153, 153, 255));
         kGradientPanel1.setkStartColor(new java.awt.Color(0, 204, 204));
@@ -81,10 +85,11 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jLabelNome.setLabelFor(jTextFieldNome);
         jLabelNome.setText("Nome:");
 
-        jTextFieldDescription.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextFieldDescription.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        jFormattedTextFieldReleaseDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        try {
+            jFormattedTextFieldReleaseDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldReleaseDate.setToolTipText("");
         jFormattedTextFieldReleaseDate.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
 
@@ -129,7 +134,6 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jLabel6.setText("Duração:");
 
         jTextFieldDuration.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextFieldDuration.setText("(em minutos)");
         jTextFieldDuration.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextFieldDuration.setDragEnabled(true);
 
@@ -156,6 +160,11 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                 jButtonCancelActionPerformed(evt);
             }
         });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -210,7 +219,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonSave)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextFieldDescription))))
+                            .addComponent(jScrollPane1))))
                 .addGap(94, 94, 94))
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -240,7 +249,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonClean)
@@ -281,7 +290,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jTextFieldNome.setText("");
         jComboBoxGenre.setSelectedIndex(0);
         jComboBoxRating.setSelectedIndex(0);
-        jTextFieldDescription.setText("");
+        jTextArea1.setText("");
         jTextFieldDirector.setText("");
         jTextFieldDuration.setText("");
 
@@ -289,26 +298,36 @@ public class MovieRegisterPage extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         MovieService service = new MovieServiceImpl();
-        Movie entity = Movie.builder()
+        try {
+
+            String[] list = jFormattedTextFieldReleaseDate.getText().split("/");
+            if (Integer.parseInt(list[1]) < 1 || Integer.parseInt(list[1]) > 12) throw new Exception("Mês de lançamento não pode ser menor que 01 ou maior que 12.");
+            if (Integer.parseInt(list[0]) < 1 || Integer.parseInt(list[0]) > 31) throw new Exception("Dia de lançamento não pode ser menor que 01 ou maior que 31.");
+            if (Integer.parseInt(list[0]) > 28 && Integer.parseInt(list[1]) == 2) throw new Exception("Fevereiro possui apenas 28 dias.");
+
+            Movie entity = Movie.builder()
                 .name(jTextFieldNome.getText())
                 .duration(Double.parseDouble(jTextFieldDuration.getText()))
                 .director(jTextFieldDirector.getText())
                 .releaseDate(jFormattedTextFieldReleaseDate.getText())
                 .genre(Genre.valueOf(jComboBoxGenre.getSelectedItem().toString()))
                 .ratings(Rating.valueOf(jComboBoxRating.getSelectedItem().toString()))
-                .description(jTextFieldDescription.getText())
+                .description(jTextArea1.getText())
                 .build();
 
-        try {
-            service.register(entity);
-        } catch (Exception e) {
 
+            service.register(entity);
+            JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!.");
+        } catch (Exception e) {
+            if (e instanceof NumberFormatException) JOptionPane.showMessageDialog(null, "A duração do filme aceita apenas números.");
+            else JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage());
         }
 
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-
+        this.dispose();
+        mainPage.setVisible(true);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
@@ -362,10 +381,12 @@ public class MovieRegisterPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCadastrarFilme;
     private javax.swing.JLabel jLabelNome;
-    private javax.swing.JTextField jTextFieldDescription;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldDirector;
     private javax.swing.JTextField jTextFieldDuration;
     private javax.swing.JTextField jTextFieldNome;
     private keeptoo.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
+    private MainPage mainPage = new MainPage();
 }

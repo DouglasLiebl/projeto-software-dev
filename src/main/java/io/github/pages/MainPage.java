@@ -42,7 +42,6 @@ public class MainPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 200));
-        setLocationByPlatform(true);
 
         kGradientPanel6.setkEndColor(new java.awt.Color(153, 153, 255));
         kGradientPanel6.setkStartColor(new java.awt.Color(0, 204, 204));
@@ -164,6 +163,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenuItemFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFilmeActionPerformed
         MovieRegisterPage registerPage = new MovieRegisterPage();
         registerPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuItemFilmeActionPerformed
 
     private void jMenuFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilmeActionPerformed
