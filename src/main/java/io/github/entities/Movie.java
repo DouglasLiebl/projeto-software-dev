@@ -19,4 +19,5 @@ public class Movie {
     private Rating ratings;
     private String description;
     private boolean isAvailable;
+
 }
