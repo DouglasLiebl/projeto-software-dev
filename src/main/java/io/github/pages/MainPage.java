@@ -26,6 +26,7 @@ public class MainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        kGradientPanel6 = new keeptoo.KGradientPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemFilme = new javax.swing.JMenuItem();
@@ -37,8 +38,25 @@ public class MainPage extends javax.swing.JFrame {
         jMenuFilme = new javax.swing.JMenuItem();
         jMenuCliente = new javax.swing.JMenuItem();
         jMenuAlugar = new javax.swing.JMenu();
+        jMenuItemAlugar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 200));
+        setLocationByPlatform(true);
+
+        kGradientPanel6.setkEndColor(new java.awt.Color(153, 153, 255));
+        kGradientPanel6.setkStartColor(new java.awt.Color(0, 204, 204));
+
+        javax.swing.GroupLayout kGradientPanel6Layout = new javax.swing.GroupLayout(kGradientPanel6);
+        kGradientPanel6.setLayout(kGradientPanel6Layout);
+        kGradientPanel6Layout.setHorizontalGroup(
+            kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        kGradientPanel6Layout.setVerticalGroup(
+            kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
 
         jMenuBar1.setBorder(null);
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -62,6 +80,11 @@ public class MainPage extends javax.swing.JFrame {
         jMenuItemCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItemCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-pequena-direita.png"))); // NOI18N
         jMenuItemCliente.setText("Cliente");
+        jMenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClienteActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItemCliente);
 
         jMenuBar1.add(jMenuCadastro);
@@ -104,6 +127,22 @@ public class MainPage extends javax.swing.JFrame {
 
         jMenuAlugar.setText("Alugar");
         jMenuAlugar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jMenuAlugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAlugarActionPerformed(evt);
+            }
+        });
+
+        jMenuItemAlugar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jMenuItemAlugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-pequena-direita.png"))); // NOI18N
+        jMenuItemAlugar.setText("Alugar");
+        jMenuItemAlugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAlugarActionPerformed(evt);
+            }
+        });
+        jMenuAlugar.add(jMenuItemAlugar);
+
         jMenuBar1.add(jMenuAlugar);
 
         setJMenuBar(jMenuBar1);
@@ -112,23 +151,39 @@ public class MainPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(kGradientPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addComponent(kGradientPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFilmeActionPerformed
-
+        MovieRegisterPage registerPage = new MovieRegisterPage();
+        registerPage.setVisible(true);
     }//GEN-LAST:event_jMenuItemFilmeActionPerformed
 
     private void jMenuFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilmeActionPerformed
-        // TODO add your handling code here:
+        MovieEditPage editPage = new MovieEditPage();
+        editPage.setVisible(true);
     }//GEN-LAST:event_jMenuFilmeActionPerformed
+
+    private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
+        ClientRegisterPage registerPage = new ClientRegisterPage();
+        registerPage.setVisible(true);
+    }//GEN-LAST:event_jMenuItemClienteActionPerformed
+
+    private void jMenuAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAlugarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuAlugarActionPerformed
+
+    private void jMenuItemAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugarActionPerformed
+        CreateLoanPage loanPage = new CreateLoanPage();
+        loanPage.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAlugarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,9 +228,11 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuCliente;
     private javax.swing.JMenuItem jMenuFilme;
+    private javax.swing.JMenuItem jMenuItemAlugar;
     private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemDadosCliente;
     private javax.swing.JMenuItem jMenuItemDisponibilidade;
     private javax.swing.JMenuItem jMenuItemFilme;
+    private keeptoo.KGradientPanel kGradientPanel6;
     // End of variables declaration//GEN-END:variables
 }
