@@ -12,8 +12,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void register(Movie request) throws Exception {
         MovieRepository repository = getMovieRepository();
-        stringValidation(request.getName());
-        stringValidation(request.getDirector());
         repository.insertMovie(request);
 
     }
@@ -46,14 +44,23 @@ public class MovieServiceImpl implements MovieService {
         return repository.getMovieByIdAndIsAvailable(id);
     }
 
+    @Override
+    public void update(Movie request) throws Exception {
+        MovieRepository repository = getMovieRepository();
+
+        repository.updateMovie(request);
+    }
+
+    @Override
+    public void delete(Long id) throws Exception {
+        MovieRepository repository = getMovieRepository();
+
+        repository.deleteMovie(id);
+    }
+
     private static MovieRepository getMovieRepository() {
         return new MovieRepository();
     }
 
-    private static void stringValidation(String request) throws Exception {
-        if (request.isEmpty()) throw new Exception("Nomes não podem estar em branco.");
-        if (request.isBlank()) throw new Exception("Nomes não podem ser vazios.");
-        if (request.equals("null")) throw new Exception("Nomes não podem ser nulos");
-    }
 
 }

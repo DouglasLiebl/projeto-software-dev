@@ -87,7 +87,7 @@ public class MovieRepository {
     }
 
     public void deleteMovie(Long id) throws Exception {
-        String sql = "DELETE FROM tb_loans WHERE movie_id = ?";
+        String sql = "DELETE FROM tb_movies WHERE id = ?";
         
         Connection conn = getConnection();
 
@@ -95,9 +95,32 @@ public class MovieRepository {
         pstmt.setLong(1, id);
         pstmt.executeQuery();
 
-        String sql2 = "DELETE FROM tb_movies WHERE id = ?";
-        pstmt = conn.prepareStatement(sql2);
-        pstmt.setLong(1, id);
+    }
+
+    public void updateMovie(Movie request) throws Exception {
+        String sql = """
+                UPDATE tb_movies
+                SET name = ?,
+                    director = ?,
+                    genre = ?,
+                    release_date = ?,
+                    rating = ?,
+                    duration = ?,
+                    description = ?
+                WHERE id = ?
+                """;
+
+        Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setString(1, request.getName());
+        pstmt.setString(2, request.getDirector());
+        pstmt.setString(3, request.getGenre().name());
+        pstmt.setString(4, request.getReleaseDate());
+        pstmt.setString(5, request.getRatings().name());
+        pstmt.setDouble(6, request.getDuration());
+        pstmt.setString(7, request.getDescription());
+        pstmt.setLong(8, request.getId());
 
         pstmt.executeQuery();
     }

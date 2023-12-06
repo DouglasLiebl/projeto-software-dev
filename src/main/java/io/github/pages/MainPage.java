@@ -169,6 +169,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenuFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilmeActionPerformed
         MovieEditPage editPage = new MovieEditPage();
         editPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuFilmeActionPerformed
 
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed

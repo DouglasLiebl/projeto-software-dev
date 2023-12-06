@@ -16,4 +16,8 @@ public interface MovieService {
     Movie getMovieById(Long id) throws SQLException, Exception;
 
     Movie getMovieByIdAndIsAvailable(Long id) throws Exception;
+
+    void update(Movie request) throws Exception;
+
+    void delete(Long id) throws Exception;
 }

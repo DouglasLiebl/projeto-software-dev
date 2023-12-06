@@ -17,7 +17,7 @@ public class LoanRepository {
 
         pstmt.setLong(1, loan.getClientId().getId());
         pstmt.setLong(2, loan.getMovieId().getId());
-        pstmt.setString(3, OffsetDateTime.now().toString());
+        pstmt.setObject(3, OffsetDateTime.now());
         pstmt.setBoolean(4, false);
 
         pstmt.executeQuery();

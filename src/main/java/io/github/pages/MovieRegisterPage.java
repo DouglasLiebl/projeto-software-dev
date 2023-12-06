@@ -9,8 +9,10 @@ import io.github.enums.Genre;
 import io.github.enums.Rating;
 import io.github.service.MovieService;
 import io.github.service.impl.MovieServiceImpl;
+import org.postgresql.util.PSQLException;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -35,11 +37,11 @@ public class MovieRegisterPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabelCadastrarFilme = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabelNome = new javax.swing.JLabel();
-        jFormattedTextFieldReleaseDate = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxGenre = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -55,6 +57,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -64,6 +67,17 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
@@ -85,16 +99,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jLabelNome.setLabelFor(jTextFieldNome);
         jLabelNome.setText("Nome:");
 
-        try {
-            jFormattedTextFieldReleaseDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldReleaseDate.setToolTipText("");
-        jFormattedTextFieldReleaseDate.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setLabelFor(jFormattedTextFieldReleaseDate);
         jLabel1.setText("Data de Lançamento:");
 
         jComboBoxGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTION", "DRAMA", "SCIENCE_FICTION", "HORROR", "COMEDY" }));
@@ -166,6 +171,13 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
@@ -182,36 +194,13 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                         .addComponent(jButtonCancel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBoxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5))
-                            .addComponent(jTextFieldDirector))
-                        .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBoxRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                .addComponent(jLabel6))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextFieldReleaseDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDuration, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldNome))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel1Layout.createSequentialGroup()
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,7 +208,29 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonSave)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))))
+                            .addComponent(jScrollPane1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBoxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldDirector))
+                        .addGap(18, 18, 18)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldDuration, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextField1))))
                 .addGap(94, 94, 94))
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -237,7 +248,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldDirector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addComponent(jFormattedTextFieldReleaseDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,23 +304,22 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jTextArea1.setText("");
         jTextFieldDirector.setText("");
         jTextFieldDuration.setText("");
+        jFormattedTextField1.setText("");
 
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         MovieService service = new MovieServiceImpl();
         try {
-
-            String[] list = jFormattedTextFieldReleaseDate.getText().split("/");
-            if (Integer.parseInt(list[1]) < 1 || Integer.parseInt(list[1]) > 12) throw new Exception("Mês de lançamento não pode ser menor que 01 ou maior que 12.");
-            if (Integer.parseInt(list[0]) < 1 || Integer.parseInt(list[0]) > 31) throw new Exception("Dia de lançamento não pode ser menor que 01 ou maior que 31.");
-            if (Integer.parseInt(list[0]) > 28 && Integer.parseInt(list[1]) == 2) throw new Exception("Fevereiro possui apenas 28 dias.");
+            stringValidation(jTextFieldNome.getText());
+            stringValidation(jTextFieldDirector.getText());
+            extracted();
 
             Movie entity = Movie.builder()
                 .name(jTextFieldNome.getText())
                 .duration(Double.parseDouble(jTextFieldDuration.getText()))
                 .director(jTextFieldDirector.getText())
-                .releaseDate(jFormattedTextFieldReleaseDate.getText())
+                .releaseDate(jFormattedTextField1.getText())
                 .genre(Genre.valueOf(jComboBoxGenre.getSelectedItem().toString()))
                 .ratings(Rating.valueOf(jComboBoxRating.getSelectedItem().toString()))
                 .description(jTextArea1.getText())
@@ -319,11 +329,35 @@ public class MovieRegisterPage extends javax.swing.JFrame {
             service.register(entity);
             JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!.");
         } catch (Exception e) {
-            if (e instanceof NumberFormatException) JOptionPane.showMessageDialog(null, "A duração do filme aceita apenas números.");
-            else JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage());
+            if (e instanceof NumberFormatException) {
+                JOptionPane.showMessageDialog(null, "A duração do filme aceita apenas números.");
+            } else if (e instanceof PSQLException) {
+                JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!.");
+            }
+            else {
+                jButtonCleanActionPerformed(evt);
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage());
+            }
+
         }
 
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private static void stringValidation(String request) throws Exception {
+        if (request.isEmpty()) throw new Exception("Nomes não podem estar em branco.");
+        if (request.isBlank()) throw new Exception("Nomes não podem ser vazios.");
+        if (request.equals("null")) throw new Exception("Nomes não podem ser nulos");
+    }
+
+    private void extracted() throws Exception {
+        String[] list = jFormattedTextField1.getText().split("/");
+        if (list[0].equals("  ") || list[1].equals("  ") || list[2].equals("  ")) throw new Exception("Data de lançamento não pode ter campos em branco.");
+
+        if (Integer.parseInt(list[1]) < 1 || Integer.parseInt(list[1]) > 12) throw new Exception("Mês de lançamento não pode ser menor que 01 ou maior que 12.");
+        if (Integer.parseInt(list[0]) < 1 || Integer.parseInt(list[0]) > 31) throw new Exception("Dia de lançamento não pode ser menor que 01 ou maior que 31.");
+        if (Integer.parseInt(list[0]) > 28 && Integer.parseInt(list[1]) == 2) throw new Exception("Fevereiro possui apenas 28 dias.");
+    }
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.dispose();
@@ -372,7 +406,8 @@ public class MovieRegisterPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxGenre;
     private javax.swing.JComboBox<String> jComboBoxRating;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JFormattedTextField jFormattedTextFieldReleaseDate;
+    private javax.swing.JDialog jDialog2;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
