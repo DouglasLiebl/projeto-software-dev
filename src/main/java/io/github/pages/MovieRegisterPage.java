@@ -5,15 +5,10 @@
 package io.github.pages;
 
 import io.github.dto.MovieDTO;
-import io.github.entities.Movie;
-import io.github.pages.datechooser.DateChooser;
-import io.github.pages.optionpane.OptionPane;
-import io.github.pages.textfield.TextField;
+import io.github.pages.dateChooser.DateChooser;
+import io.github.pages.optionPane.OptionPane;
 import io.github.service.MovieService;
 import io.github.service.impl.MovieServiceImpl;
-import org.postgresql.util.PSQLException;
-
-import javax.swing.*;
 
 /**
  *
@@ -41,16 +36,16 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jDialog2 = new javax.swing.JDialog();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabelCadastrarFilme = new javax.swing.JLabel();
-        textFieldNome = new io.github.pages.textfield.TextField();
-        textFieldDiretor = new io.github.pages.textfield.TextField();
+        textFieldNome = new io.github.pages.textField.TextField();
+        textFieldDiretor = new io.github.pages.textField.TextField();
         comboboxGenero = new io.github.pages.Combobox();
         comboboxClass = new io.github.pages.Combobox();
-        textFieldDuracao = new io.github.pages.textfield.TextField();
-        textField1 = new io.github.pages.textfield.TextField();
+        textFieldDuracao = new io.github.pages.textField.TextField();
+        textField1 = new io.github.pages.textField.TextField();
         button1 = new io.github.pages.button.Button();
         buttonCancelar = new io.github.pages.button.Button();
-        textAreaScroll1 = new io.github.pages.textarea.TextAreaScroll();
-        textArea1 = new io.github.pages.textarea.TextArea();
+        textAreaScroll1 = new io.github.pages.textArea.TextAreaScroll();
+        textArea1 = new io.github.pages.textArea.TextArea();
         buttonSalvar = new io.github.pages.button.Button();
         buttonLimpar = new io.github.pages.button.Button();
 
@@ -275,7 +270,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    public void OptionPane(String message) {
+    private void OptionPane(String message) {
         var teste = new OptionPane();
         teste.setMessage(message);
         teste.setVisible(true);
@@ -336,12 +331,12 @@ public class MovieRegisterPage extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabelCadastrarFilme;
     private keeptoo.KGradientPanel kGradientPanel1;
-    private io.github.pages.textarea.TextArea textArea1;
-    private io.github.pages.textarea.TextAreaScroll textAreaScroll1;
-    private io.github.pages.textfield.TextField textField1;
-    private io.github.pages.textfield.TextField textFieldDiretor;
-    private io.github.pages.textfield.TextField textFieldDuracao;
-    private io.github.pages.textfield.TextField textFieldNome;
+    private io.github.pages.textArea.TextArea textArea1;
+    private io.github.pages.textArea.TextAreaScroll textAreaScroll1;
+    private io.github.pages.textField.TextField textField1;
+    private io.github.pages.textField.TextField textFieldDiretor;
+    private io.github.pages.textField.TextField textFieldDuracao;
+    private io.github.pages.textField.TextField textFieldNome;
     // End of variables declaration//GEN-END:variables
     private MainPage mainPage = new MainPage();
     private DateChooser dateChooser = new DateChooser();

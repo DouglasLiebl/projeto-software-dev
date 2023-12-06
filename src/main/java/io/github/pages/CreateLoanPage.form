@@ -157,7 +157,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="io.github.pages.textfield.TextField" name="textField1">
+        <Component class="io.github.pages.textField.TextField" name="textField1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="JetBrains Mono" size="14" style="0"/>
@@ -165,7 +165,7 @@
             <Property name="labelText" type="java.lang.String" value="Email do Cliente"/>
           </Properties>
         </Component>
-        <Component class="io.github.pages.textfield.TextField" name="textField2">
+        <Component class="io.github.pages.textField.TextField" name="textField2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="JetBrains Mono" size="14" style="0"/>

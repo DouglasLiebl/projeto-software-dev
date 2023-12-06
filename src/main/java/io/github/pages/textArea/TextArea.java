@@ -1,4 +1,4 @@
-package io.github.pages.textarea;
+package io.github.pages.textArea;
 
 
 import org.jdesktop.animation.timing.Animator;

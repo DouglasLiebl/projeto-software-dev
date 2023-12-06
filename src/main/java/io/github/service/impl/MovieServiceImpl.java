@@ -42,7 +42,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void update(MovieDTO request) throws Exception {
-        repository.updateMovie(Movie.of(request));
+        var movie = Movie.of(request);
+        movie.setId(request.getId());
+        repository.updateMovie(movie);
     }
 
     @Override

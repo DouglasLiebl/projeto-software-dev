@@ -1,4 +1,4 @@
-package io.github.pages.datechooser;
+package io.github.pages.dateChooser;
 
 import java.awt.*;
 
