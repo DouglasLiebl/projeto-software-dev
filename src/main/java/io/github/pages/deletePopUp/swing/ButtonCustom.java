@@ -1,4 +1,4 @@
-package io.github.pages.deleteOptionPanel.swing;
+package io.github.pages.deletePopUp.swing;
 
 import javax.swing.*;
 import java.awt.*;

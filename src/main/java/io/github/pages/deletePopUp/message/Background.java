@@ -1,4 +1,4 @@
-package io.github.pages.deleteOptionPanel.message;
+package io.github.pages.deletePopUp.message;
 
 import javax.swing.*;
 import java.awt.*;

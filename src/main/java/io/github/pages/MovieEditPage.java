@@ -7,11 +7,16 @@ package io.github.pages;
 import io.github.dto.MovieDTO;
 import io.github.entities.Movie;
 import io.github.pages.dateChooser.DateChooser;
-import io.github.pages.deleteOptionPanel.message.MessageDialog;
+import io.github.pages.deletePopUp.message.MessageDialog;
 import io.github.pages.optionPane.OptionPane;
+import io.github.pages.generalPopUp.Message;
+import io.github.pages.generalPopUp.glass.GlassPanePopup;
 import io.github.service.MovieService;
 import io.github.service.impl.MovieServiceImpl;
 import org.postgresql.util.PSQLException;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -24,6 +29,7 @@ public class MovieEditPage extends javax.swing.JFrame {
      */
     public MovieEditPage() {
         initComponents();
+        GlassPanePopup.install(this);
     }
 
     /**
@@ -300,11 +306,10 @@ public class MovieEditPage extends javax.swing.JFrame {
             request.setId(Long.parseLong(textFieldId.getText()));
 
             movieService.update(request);
-            OptionPane("Filme editado com sucesso!");
         } catch (Exception e) {
-            if (e instanceof NumberFormatException) OptionPane("A duração do filme aceita apenas números.");
-            if (e instanceof PSQLException) OptionPane("Filme editado com sucesso.");
-            else OptionPane(e.getMessage());
+            if (e instanceof NumberFormatException) showPopUp("A duração do filme aceita apenas números.", "Erro:");
+            if (e instanceof PSQLException) showPopUp("Filme editado com sucesso!", "Operação bem sucedida:");
+            else showPopUp(e.getMessage(), "Erro");
 
             buttonLimparActionPerformed(evt);
             disableButtons();
@@ -349,9 +354,10 @@ public class MovieEditPage extends javax.swing.JFrame {
             textFieldNome.setEnabled(true);
             textField1.setEnabled(true);
             textArea1.setEnabled(true);
+            button1.setEnabled(true);
             textAreaScroll1.setEnabled(true);
         } catch (Exception e) {
-            OptionPane(e.getMessage());
+            showPopUp(e.getMessage(), "Erro:");
         }
     }//GEN-LAST:event_buttonEditarActionPerformed
 
@@ -363,12 +369,11 @@ public class MovieEditPage extends javax.swing.JFrame {
 
             if (box.getMessageType() == MessageDialog.MessageType.OK) {
                 movieService.delete(Long.parseLong(textFieldId.getText()));
-                OptionPane("Filme deletado com sucesso!");
             }
 
         } catch (Exception e) {
-            if (e instanceof PSQLException) OptionPane("Filme deletado com sucesso!");
-            OptionPane(e.getMessage());
+            if (e instanceof PSQLException) showPopUp("Filme deletado com sucesso!", "Operação bem sucedida:");
+            showPopUp(e.getMessage(), "Erro:");
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -387,10 +392,22 @@ public class MovieEditPage extends javax.swing.JFrame {
             JComboBoxRatingsChanges(Movie.of(movie));
 
         } catch (Exception e) {
-            OptionPane(e.getMessage());
+            showPopUp(e.getMessage(), "Erro:");
         }
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
+    private void showPopUp(String message, String title) {
+        Message obj = new Message();
+        obj.setMessage(message);
+        obj.setTitle(title);
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                GlassPanePopup.closePopupLast();
+            }
+        });
+        GlassPanePopup.showPopup(obj);
+    }
     private void JComboBoxGeneroChanges(Movie movie) {
         switch (movie.getGenre()) {
             case ACTION -> comboboxGenero.setSelectedIndex(0);
@@ -414,7 +431,7 @@ public class MovieEditPage extends javax.swing.JFrame {
     private static void stringValidation(String request) throws Exception {
         if (request.isEmpty()) throw new Exception("Nomes não podem estar em branco.");
         if (request.isBlank()) throw new Exception("Nomes não podem ser vazios.");
-        if (request.equals("null")) throw new Exception("Nomes não podem ser nulos");
+        if (request.equals("null")) throw new Exception("Nomes não podem ser nulos.");
     }
 
     /**

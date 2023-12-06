@@ -1,8 +1,8 @@
-package io.github.pages.deleteOptionPanel.message;
+package io.github.pages.deletePopUp.message;
 
 
-import io.github.pages.deleteOptionPanel.swing.ButtonCustom;
-import io.github.pages.deleteOptionPanel.swing.Glass;
+import io.github.pages.deletePopUp.swing.ButtonCustom;
+import io.github.pages.deletePopUp.swing.Glass;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 

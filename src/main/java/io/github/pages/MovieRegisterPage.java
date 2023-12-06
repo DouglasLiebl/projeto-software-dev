@@ -6,9 +6,13 @@ package io.github.pages;
 
 import io.github.dto.MovieDTO;
 import io.github.pages.dateChooser.DateChooser;
-import io.github.pages.optionPane.OptionPane;
+import io.github.pages.generalPopUp.Message;
+import io.github.pages.generalPopUp.glass.GlassPanePopup;
 import io.github.service.MovieService;
 import io.github.service.impl.MovieServiceImpl;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -21,6 +25,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
      */
     public MovieRegisterPage() {
         initComponents();
+        GlassPanePopup.install(this);
     }
 
     /**
@@ -261,20 +266,16 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                    .build();
 
            movieService.register(request);
-           OptionPane("Filme salvo com sucesso!");
-
+           showPopUp("Filme salvo com sucesso!", "Operação bem sucedida:");
            buttonLimparActionPerformed(evt);
+
        } catch (Exception e) {
-           if (e instanceof NumberFormatException) OptionPane("A duração do filme aceita apenas números.");
-           else OptionPane(e.getMessage());
+           if (e instanceof NumberFormatException) showPopUp("A duração do filme aceita apenas números.", "Erro:");
+           if (e instanceof NullPointerException) showPopUp("O campo Gênero e Classificação devem ter valores selecionados.", "Erro:");
+           else showPopUp(e.getMessage(), "Erro:");
        }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void OptionPane(String message) {
-        var teste = new OptionPane();
-        teste.setMessage(message);
-        teste.setVisible(true);
-    }
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
         textFieldNome.setText("");
         textFieldDiretor.setText("");
@@ -285,6 +286,18 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         comboboxGenero.setSelectedIndex(-1);
     }//GEN-LAST:event_buttonLimparActionPerformed
 
+    private void showPopUp(String message, String title) {
+        Message obj = new Message();
+        obj.setMessage(message);
+        obj.setTitle(title);
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                GlassPanePopup.closePopupLast();
+            }
+        });
+        GlassPanePopup.showPopup(obj);
+    }
     /**
      * @param args the command line arguments
      */
