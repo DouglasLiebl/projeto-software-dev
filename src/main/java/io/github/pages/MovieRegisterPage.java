@@ -4,6 +4,7 @@
  */
 package io.github.pages;
 
+import io.github.dto.MovieDTO;
 import io.github.entities.Movie;
 import io.github.pages.datechooser.DateChooser;
 import io.github.pages.optionpane.OptionPane;
@@ -47,14 +48,11 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         textFieldDuracao = new io.github.pages.textfield.TextField();
         textField1 = new io.github.pages.textfield.TextField();
         button1 = new io.github.pages.button.Button();
-        buttonCancellar = new io.github.pages.button.Button();
+        buttonCancelar = new io.github.pages.button.Button();
         textAreaScroll1 = new io.github.pages.textarea.TextAreaScroll();
         textArea1 = new io.github.pages.textarea.TextArea();
         buttonSalvar = new io.github.pages.button.Button();
         buttonLimpar = new io.github.pages.button.Button();
-
-        dateChooser = new DateChooser();
-        dateChooser.setTextRefernce(textField1);
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -120,12 +118,12 @@ public class MovieRegisterPage extends javax.swing.JFrame {
             }
         });
 
-        buttonCancellar.setText("Cancelar");
-        buttonCancellar.setFocusPainted(false);
-        buttonCancellar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        buttonCancellar.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.setFocusPainted(false);
+        buttonCancelar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCancellarActionPerformed(evt);
+                buttonCancelarActionPerformed(evt);
             }
         });
 
@@ -149,6 +147,11 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         buttonLimpar.setText("Limpar Campos");
         buttonLimpar.setFocusPainted(false);
         buttonLimpar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -162,7 +165,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
-                        .addComponent(buttonCancellar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabelCadastrarFilme)
                         .addGroup(kGradientPanel1Layout.createSequentialGroup()
@@ -173,8 +176,8 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                             .addComponent(comboboxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(comboboxClass, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(83, 83, 83)
+                            .addComponent(comboboxClass, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(66, 66, 66)
                             .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +207,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCancellar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
@@ -237,23 +240,55 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         if (request.equals("null")) throw new Exception("Nomes não podem ser nulos");
     }
 
-
-
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        dateChooser.setTextRefernce(textField1);
         dateChooser.showPopup();
-        
     }//GEN-LAST:event_button1ActionPerformed
 
-    private void buttonCancellarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancellarActionPerformed
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         this.dispose();
         mainPage.setVisible(true);
-    }//GEN-LAST:event_buttonCancellarActionPerformed
+    }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        var teste = new OptionPane();
-        teste.setMessage("Successfully saved movie");
-        teste.setVisible(true);
+       try {
+           stringValidation(textFieldNome.getText());
+           stringValidation(textFieldDiretor.getText());
+
+           MovieDTO request = MovieDTO.builder()
+                   .name(textFieldNome.getText())
+                   .director(textFieldDiretor.getText())
+                   .duration(textFieldDuracao.getText())
+                   .genre(comboboxGenero.getSelectedItem().toString())
+                   .rating(comboboxClass.getSelectedItem().toString())
+                   .releaseDate(textField1.getText())
+                   .description(textArea1.getText())
+                   .build();
+
+           movieService.register(request);
+           OptionPane("Filme salvo com sucesso!");
+
+           buttonLimparActionPerformed(evt);
+       } catch (Exception e) {
+           if (e instanceof NumberFormatException) OptionPane("A duração do filme aceita apenas números.");
+           else OptionPane(e.getMessage());
+       }
     }//GEN-LAST:event_buttonSalvarActionPerformed
+
+    public void OptionPane(String message) {
+        var teste = new OptionPane();
+        teste.setMessage(message);
+        teste.setVisible(true);
+    }
+    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
+        textFieldNome.setText("");
+        textFieldDiretor.setText("");
+        textFieldDuracao.setText("");
+        textArea1.setText("");
+        textField1.setText("");
+        comboboxClass.setSelectedIndex(-1);
+        comboboxGenero.setSelectedIndex(-1);
+    }//GEN-LAST:event_buttonLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,7 +327,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private io.github.pages.button.Button button1;
-    private io.github.pages.button.Button buttonCancellar;
+    private io.github.pages.button.Button buttonCancelar;
     private io.github.pages.button.Button buttonLimpar;
     private io.github.pages.button.Button buttonSalvar;
     private io.github.pages.Combobox comboboxClass;
@@ -311,4 +346,5 @@ public class MovieRegisterPage extends javax.swing.JFrame {
     private MainPage mainPage = new MainPage();
     private DateChooser dateChooser = new DateChooser();
 
+    private MovieService movieService = new MovieServiceImpl();
 }

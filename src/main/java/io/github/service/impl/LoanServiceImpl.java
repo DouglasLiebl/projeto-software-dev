@@ -18,7 +18,6 @@ public class LoanServiceImpl implements LoanService {
         var client = clientService.getClientByEmail(email);
 
         Loan request = Loan.builder()
-                .movieId(movie)
                 .clientId(client)
                 .build();
 

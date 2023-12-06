@@ -8,8 +8,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString
 public class Client extends Person {
+
     private String email;
     private String cpf;
-
 
 }

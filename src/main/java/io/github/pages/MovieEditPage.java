@@ -4,6 +4,7 @@
  */
 package io.github.pages;
 
+import io.github.dto.MovieDTO;
 import io.github.entities.Movie;
 import io.github.enums.Genre;
 import io.github.enums.Rating;
@@ -302,18 +303,6 @@ public class MovieEditPage extends javax.swing.JFrame {
             stringValidation(jTextFieldDiretor.getText());
             extracted();
 
-            Movie request = Movie.builder()
-                    .id(Long.parseLong(jTextFieldId.getText()))
-                    .name(jTextFieldNome.getText())
-                    .director(jTextFieldDiretor.getText())
-                    .genre(Genre.valueOf(jComboBoxGenero.getSelectedItem().toString()))
-                    .ratings(Rating.valueOf(jComboBoxRating.getSelectedItem().toString()))
-                    .duration(Double.parseDouble(jTextFieldDuracao.getText()))
-                    .releaseDate(jFormattedTextFieldDataLancamento.getText())
-                    .description(jTextFieldDescricao.getText())
-                    .build();
-
-            service.update(request);
             JOptionPane.showMessageDialog(null, "Filme editado com sucesso!.");
         } catch (Exception e) {
             if (e instanceof NumberFormatException) JOptionPane.showMessageDialog(null, "A duração do filme aceita apenas números.");
@@ -352,7 +341,7 @@ public class MovieEditPage extends javax.swing.JFrame {
     }
 
     private void JComboBoxRatingsChanges(Movie movie) {
-        switch (movie.getRatings()) {
+        switch (movie.getRating()) {
             case G -> jComboBoxRating.setSelectedIndex(0);
             case PG -> jComboBoxRating.setSelectedItem(1);
             case PG13 -> jComboBoxRating.setSelectedItem(2);
@@ -374,8 +363,6 @@ public class MovieEditPage extends javax.swing.JFrame {
             jTextFieldDescricao.setText(movie.getDescription());
             jFormattedTextFieldDataLancamento.setText(movie.getReleaseDate());
 
-            JComboBoxGeneroChanges(movie);
-            JComboBoxRatingsChanges(movie);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

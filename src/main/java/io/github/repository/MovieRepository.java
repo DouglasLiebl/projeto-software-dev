@@ -23,7 +23,7 @@ public class MovieRepository {
         pstmt.setString(3, movie.getDirector());
         pstmt.setString(4, movie.getReleaseDate());
         pstmt.setString(5, movie.getGenre().name());
-        pstmt.setString(6, movie.getRatings().name());
+        pstmt.setString(6, movie.getRating().name());
         pstmt.setString(7,  movie.getDescription());
         pstmt.setBoolean(8, true);
 
@@ -117,7 +117,7 @@ public class MovieRepository {
         pstmt.setString(2, request.getDirector());
         pstmt.setString(3, request.getGenre().name());
         pstmt.setString(4, request.getReleaseDate());
-        pstmt.setString(5, request.getRatings().name());
+        pstmt.setString(5, request.getRating().name());
         pstmt.setDouble(6, request.getDuration());
         pstmt.setString(7, request.getDescription());
         pstmt.setLong(8, request.getId());
@@ -137,7 +137,7 @@ public class MovieRepository {
                 .director(rs.getString("director"))
                 .releaseDate(rs.getString("release_date"))
                 .genre(Genre.valueOf(rs.getString("genre")))
-                .ratings(Rating.valueOf(rs.getString("rating")))
+                .rating(Rating.valueOf(rs.getString("rating")))
                 .description(rs.getString("description"))
                 .isAvailable(rs.getBoolean("is_available"))
                 .build();

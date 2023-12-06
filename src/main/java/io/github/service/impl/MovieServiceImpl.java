@@ -1,5 +1,6 @@
 package io.github.service.impl;
 
+import io.github.dto.MovieDTO;
 import io.github.entities.Movie;
 import io.github.repository.MovieRepository;
 import io.github.service.MovieService;
@@ -9,57 +10,44 @@ import java.util.List;
 
 public class MovieServiceImpl implements MovieService {
 
-    @Override
-    public void register(Movie request) throws Exception {
-        MovieRepository repository = getMovieRepository();
-        repository.insertMovie(request);
+    private final MovieRepository repository = new MovieRepository();
 
+    @Override
+    public void register(MovieDTO request) throws Exception {
+        repository.insertMovie(Movie.of(request));
     }
 
     @SneakyThrows
     @Override
     public List<Movie> getAll() {
-        MovieRepository repository = getMovieRepository();
+
         return repository.getAll();
     }
 
     @Override
-    public Movie findByName(String name) throws Exception {
-        MovieRepository repository = getMovieRepository();
-        return repository.getMovieByName(name);
+    public MovieDTO findByName(String name) throws Exception {
+        return MovieDTO.of(repository.getMovieByName(name));
     }
 
 
     @Override
-    public Movie getMovieById(Long id) throws Exception {
-        MovieRepository repository = getMovieRepository();
-
-        return repository.getMovieById(id);
+    public MovieDTO getMovieById(Long id) throws Exception {
+        return MovieDTO.of(repository.getMovieById(id));
     }
 
     @Override
-    public Movie getMovieByIdAndIsAvailable(Long id) throws Exception{
-        MovieRepository repository = getMovieRepository();
-
-        return repository.getMovieByIdAndIsAvailable(id);
+    public MovieDTO getMovieByIdAndIsAvailable(Long id) throws Exception{
+        return MovieDTO.of(repository.getMovieByIdAndIsAvailable(id));
     }
 
     @Override
-    public void update(Movie request) throws Exception {
-        MovieRepository repository = getMovieRepository();
-
-        repository.updateMovie(request);
+    public void update(MovieDTO request) throws Exception {
+        repository.updateMovie(Movie.of(request));
     }
 
     @Override
     public void delete(Long id) throws Exception {
-        MovieRepository repository = getMovieRepository();
-
         repository.deleteMovie(id);
-    }
-
-    private static MovieRepository getMovieRepository() {
-        return new MovieRepository();
     }
 
 

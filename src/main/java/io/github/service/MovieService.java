@@ -1,5 +1,6 @@
 package io.github.service;
 
+import io.github.dto.MovieDTO;
 import io.github.entities.Movie;
 
 import java.sql.SQLException;
@@ -7,17 +8,17 @@ import java.util.List;
 
 public interface MovieService {
 
-    void register(Movie request) throws Exception;
+    void register(MovieDTO request) throws Exception;
 
     List<Movie> getAll();
 
-    Movie findByName(String name) throws Exception;
+    MovieDTO findByName(String name) throws Exception;
 
-    Movie getMovieById(Long id) throws SQLException, Exception;
+    MovieDTO getMovieById(Long id) throws SQLException, Exception;
 
-    Movie getMovieByIdAndIsAvailable(Long id) throws Exception;
+    MovieDTO getMovieByIdAndIsAvailable(Long id) throws Exception;
 
-    void update(Movie request) throws Exception;
+    void update(MovieDTO request) throws Exception;
 
     void delete(Long id) throws Exception;
 }
