@@ -5,14 +5,14 @@
 package io.github.pages;
 
 import io.github.entities.Movie;
-import io.github.enums.Genre;
-import io.github.enums.Rating;
+import io.github.pages.datechooser.DateChooser;
+import io.github.pages.optionpane.OptionPane;
+import io.github.pages.textfield.TextField;
 import io.github.service.MovieService;
 import io.github.service.impl.MovieServiceImpl;
 import org.postgresql.util.PSQLException;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 /**
  *
@@ -40,24 +40,21 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         jDialog2 = new javax.swing.JDialog();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabelCadastrarFilme = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jLabelNome = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBoxGenre = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextFieldDirector = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBoxRating = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jTextFieldDuration = new javax.swing.JTextField();
-        jButtonSave = new javax.swing.JButton();
-        jButtonClean = new javax.swing.JButton();
-        jButtonCancel = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        textFieldNome = new io.github.pages.textfield.TextField();
+        textFieldDiretor = new io.github.pages.textfield.TextField();
+        comboboxGenero = new io.github.pages.Combobox();
+        comboboxClass = new io.github.pages.Combobox();
+        textFieldDuracao = new io.github.pages.textfield.TextField();
+        textField1 = new io.github.pages.textfield.TextField();
+        button1 = new io.github.pages.button.Button();
+        buttonCancellar = new io.github.pages.button.Button();
+        textAreaScroll1 = new io.github.pages.textarea.TextAreaScroll();
+        textArea1 = new io.github.pages.textarea.TextArea();
+        buttonSalvar = new io.github.pages.button.Button();
+        buttonLimpar = new io.github.pages.button.Button();
+
+        dateChooser = new DateChooser();
+        dateChooser.setTextRefernce(textField1);
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -85,188 +82,132 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         setLocation(new java.awt.Point(500, 200));
         setUndecorated(true);
 
-        kGradientPanel1.setkEndColor(new java.awt.Color(153, 153, 255));
-        kGradientPanel1.setkStartColor(new java.awt.Color(0, 204, 204));
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 0, 0));
+        kGradientPanel1.setkStartColor(new java.awt.Color(204, 204, 204));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(760, 460));
 
-        jLabelCadastrarFilme.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabelCadastrarFilme.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
         jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
         jLabelCadastrarFilme.setText("Cadastrar Filme");
 
-        jTextFieldNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        textFieldNome.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldNome.setLabelText("Nome");
 
-        jLabelNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabelNome.setLabelFor(jTextFieldNome);
-        jLabelNome.setText("Nome:");
+        textFieldDiretor.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldDiretor.setLabelText("Diretor");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("Data de Lançamento:");
+        comboboxGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ACTION", "DRAMA", "SCIENCE_FICTION", "HORROR", "COMEDY" }));
+        comboboxGenero.setSelectedIndex(-1);
+        comboboxGenero.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        comboboxGenero.setLabeText("Gênero");
 
-        jComboBoxGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTION", "DRAMA", "SCIENCE_FICTION", "HORROR", "COMEDY" }));
-        jComboBoxGenre.addActionListener(new java.awt.event.ActionListener() {
+        comboboxClass.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "G", "PG", "PG13", "R", "NC17" }));
+        comboboxClass.setSelectedIndex(-1);
+        comboboxClass.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        comboboxClass.setLabeText("Classificação");
+
+        textFieldDuracao.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldDuracao.setLabelText("Duração (em minutos)");
+
+        textField1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textField1.setLabelText("Data de Lançamento");
+
+        button1.setText("...");
+        button1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxGenreActionPerformed(evt);
+                button1ActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setLabelFor(jComboBoxGenre);
-        jLabel2.setText("Gênero:");
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("Descrição");
-
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setLabelFor(jTextFieldDirector);
-        jLabel4.setText("Diretor:");
-
-        jTextFieldDirector.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setLabelFor(jComboBoxRating);
-        jLabel5.setText("Classificação:");
-
-        jComboBoxRating.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jComboBoxRating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "G", "PG", "PG13", "R", "NC17" }));
-        jComboBoxRating.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancellar.setText("Cancelar");
+        buttonCancellar.setFocusPainted(false);
+        buttonCancellar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonCancellar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxRatingActionPerformed(evt);
+                buttonCancellarActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel6.setLabelFor(jTextFieldDuration);
-        jLabel6.setText("Duração:");
+        textAreaScroll1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textAreaScroll1.setLabelText("Descrição");
 
-        jTextFieldDuration.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextFieldDuration.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextFieldDuration.setDragEnabled(true);
+        textArea1.setBackground(new java.awt.Color(245, 245, 245));
+        textArea1.setColumns(20);
+        textArea1.setRows(5);
+        textAreaScroll1.setViewportView(textArea1);
 
-        jButtonSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonSave.setText("Salvar");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.setFocusPainted(false);
+        buttonSalvar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                buttonSalvarActionPerformed(evt);
             }
         });
 
-        jButtonClean.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonClean.setText("Limpar Campos");
-        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCleanActionPerformed(evt);
-            }
-        });
-
-        jButtonCancel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonCancel.setText("Cancelar");
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
-            }
-        });
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        buttonLimpar.setText("Limpar Campos");
+        buttonLimpar.setFocusPainted(false);
+        buttonLimpar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabelCadastrarFilme))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jButtonClean)
-                        .addGap(65, 65, 65)
-                        .addComponent(jButtonCancel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabelNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNome))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonSave)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBoxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextFieldDirector))
+                        .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldDuration, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField1))))
-                .addGap(94, 94, 94))
+                        .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
+                        .addComponent(buttonCancellar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelCadastrarFilme)
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                            .addComponent(textFieldDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textFieldDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textFieldNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                            .addComponent(comboboxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(comboboxClass, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(83, 83, 83)
+                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12))
+                        .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabelCadastrarFilme)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNome))
-                .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldDirector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBoxRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonClean)
-                    .addComponent(jButtonSave)
-                    .addComponent(jButtonCancel))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboboxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboboxClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCancellar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,75 +215,21 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGenreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxGenreActionPerformed
-
-    private void jComboBoxRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRatingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxRatingActionPerformed
-
-    private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-        jTextFieldNome.setText("");
-        jComboBoxGenre.setSelectedIndex(0);
-        jComboBoxRating.setSelectedIndex(0);
-        jTextArea1.setText("");
-        jTextFieldDirector.setText("");
-        jTextFieldDuration.setText("");
-        jFormattedTextField1.setText("");
-
-    }//GEN-LAST:event_jButtonCleanActionPerformed
-
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        MovieService service = new MovieServiceImpl();
-        try {
-            stringValidation(jTextFieldNome.getText());
-            stringValidation(jTextFieldDirector.getText());
-            extracted();
-
-            Movie entity = Movie.builder()
-                .name(jTextFieldNome.getText())
-                .duration(Double.parseDouble(jTextFieldDuration.getText()))
-                .director(jTextFieldDirector.getText())
-                .releaseDate(jFormattedTextField1.getText())
-                .genre(Genre.valueOf(jComboBoxGenre.getSelectedItem().toString()))
-                .ratings(Rating.valueOf(jComboBoxRating.getSelectedItem().toString()))
-                .description(jTextArea1.getText())
-                .build();
-
-
-            service.register(entity);
-            JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!.");
-        } catch (Exception e) {
-            if (e instanceof NumberFormatException) {
-                JOptionPane.showMessageDialog(null, "A duração do filme aceita apenas números.");
-            } else if (e instanceof PSQLException) {
-                JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!.");
-            }
-            else {
-                jButtonCleanActionPerformed(evt);
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage());
-            }
-
-        }
-
-    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private static void stringValidation(String request) throws Exception {
         if (request.isEmpty()) throw new Exception("Nomes não podem estar em branco.");
@@ -350,19 +237,23 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         if (request.equals("null")) throw new Exception("Nomes não podem ser nulos");
     }
 
-    private void extracted() throws Exception {
-        String[] list = jFormattedTextField1.getText().split("/");
-        if (list[0].equals("  ") || list[1].equals("  ") || list[2].equals("  ")) throw new Exception("Data de lançamento não pode ter campos em branco.");
 
-        if (Integer.parseInt(list[1]) < 1 || Integer.parseInt(list[1]) > 12) throw new Exception("Mês de lançamento não pode ser menor que 01 ou maior que 12.");
-        if (Integer.parseInt(list[0]) < 1 || Integer.parseInt(list[0]) > 31) throw new Exception("Dia de lançamento não pode ser menor que 01 ou maior que 31.");
-        if (Integer.parseInt(list[0]) > 28 && Integer.parseInt(list[1]) == 2) throw new Exception("Fevereiro possui apenas 28 dias.");
-    }
 
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        dateChooser.showPopup();
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void buttonCancellarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancellarActionPerformed
         this.dispose();
         mainPage.setVisible(true);
-    }//GEN-LAST:event_jButtonCancelActionPerformed
+    }//GEN-LAST:event_buttonCancellarActionPerformed
+
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
+        var teste = new OptionPane();
+        teste.setMessage("Successfully saved movie");
+        teste.setVisible(true);
+    }//GEN-LAST:event_buttonSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,7 +262,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -400,28 +291,24 @@ public class MovieRegisterPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonClean;
-    private javax.swing.JButton jButtonSave;
-    private javax.swing.JComboBox<String> jComboBoxGenre;
-    private javax.swing.JComboBox<String> jComboBoxRating;
+    private io.github.pages.button.Button button1;
+    private io.github.pages.button.Button buttonCancellar;
+    private io.github.pages.button.Button buttonLimpar;
+    private io.github.pages.button.Button buttonSalvar;
+    private io.github.pages.Combobox comboboxClass;
+    private io.github.pages.Combobox comboboxGenero;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCadastrarFilme;
-    private javax.swing.JLabel jLabelNome;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextFieldDirector;
-    private javax.swing.JTextField jTextFieldDuration;
-    private javax.swing.JTextField jTextFieldNome;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private io.github.pages.textarea.TextArea textArea1;
+    private io.github.pages.textarea.TextAreaScroll textAreaScroll1;
+    private io.github.pages.textfield.TextField textField1;
+    private io.github.pages.textfield.TextField textFieldDiretor;
+    private io.github.pages.textfield.TextField textFieldDuracao;
+    private io.github.pages.textfield.TextField textFieldNome;
     // End of variables declaration//GEN-END:variables
     private MainPage mainPage = new MainPage();
+    private DateChooser dateChooser = new DateChooser();
+
 }

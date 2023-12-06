@@ -297,6 +297,7 @@ public class MovieEditPage extends javax.swing.JFrame {
         MovieService service = new MovieServiceImpl();
 
         try {
+            if (jTextFieldId.getText().isBlank()) throw new Exception("Você deve buscar o filme primeiro.");
             stringValidation(jTextFieldNome.getText());
             stringValidation(jTextFieldDiretor.getText());
             extracted();

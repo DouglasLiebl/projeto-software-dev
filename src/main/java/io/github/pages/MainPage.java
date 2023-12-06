@@ -4,6 +4,8 @@
  */
 package io.github.pages;
 
+import io.github.entities.Client;
+
 /**
  *
  * @author dougl
@@ -54,7 +56,7 @@ public class MainPage extends javax.swing.JFrame {
         );
         kGradientPanel6Layout.setVerticalGroup(
             kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addGap(0, 430, Short.MAX_VALUE)
         );
 
         jMenuBar1.setBorder(null);

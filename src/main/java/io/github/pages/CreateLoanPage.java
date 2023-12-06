@@ -4,6 +4,7 @@
  */
 package io.github.pages;
 
+import io.github.pages.textfield.TextField;
 import io.github.service.LoanService;
 import io.github.service.impl.LoanServiceImpl;
 
@@ -34,10 +35,8 @@ public class CreateLoanPage extends javax.swing.JFrame {
         jButtonSave = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
+        textField1 = new TextField();
+        textField2 = new TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(500, 200));
@@ -74,17 +73,11 @@ public class CreateLoanPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setLabelFor(jTextFieldEmail);
-        jLabel1.setText("Email Cliente:");
+        textField1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textField1.setLabelText("Email do Cliente");
 
-        jTextFieldEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setLabelFor(jTextFieldId);
-        jLabel2.setText("Id Filme:");
-
-        jTextFieldId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        textField2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textField2.setLabelText("Id Filme");
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -98,46 +91,35 @@ public class CreateLoanPage extends javax.swing.JFrame {
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(jLabel1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)))
-                        .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addGap(213, 213, 213)
                                 .addComponent(jButtonClean))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addGap(98, 98, 98)
                                 .addComponent(jButtonSave)))
                         .addGap(50, 50, 50)
-                        .addComponent(jButtonCancel)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                        .addComponent(jButtonCancel))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabelCadastrarFilme)
-                .addGap(59, 59, 59)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(151, 151, 151)
+                .addGap(45, 45, 45)
+                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClean)
                     .addComponent(jButtonSave)
                     .addComponent(jButtonCancel))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,16 +147,16 @@ public class CreateLoanPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-        jTextFieldEmail.setText("");
-        jTextFieldId.setText("");
+        textField1.setText("");
+        textField2.setText("");
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         LoanService service = new LoanServiceImpl();
 
         try {
-            service.createLoan(Long.parseLong(jTextFieldId.getText()),
-                    jTextFieldEmail.getText());
+            service.createLoan(Long.parseLong(textField1.getText()),
+                    textField2.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -219,11 +201,10 @@ public class CreateLoanPage extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonClean;
     private javax.swing.JButton jButtonSave;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCadastrarFilme;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldId;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private TextField textField1;
+    private TextField textField2;
     // End of variables declaration//GEN-END:variables
+    private TextField textField;
 }
