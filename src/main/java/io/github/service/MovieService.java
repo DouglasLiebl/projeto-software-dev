@@ -20,4 +20,6 @@ public interface MovieService {
     void update(MovieDTO request) throws Exception;
 
     void delete(Long id) throws Exception;
+
+    void updateMovieStatus(Long id, Boolean isAvailable) throws Exception;
 }

@@ -98,6 +98,25 @@ public class MovieRepository {
 
     }
 
+    public void updateMovieStatus(Long id, Boolean isAvailable) throws Exception {
+        String sql = """
+                UPDATE tb_movies
+                SET is_available = ?
+                WHERE id = ?
+                """;
+
+        Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setBoolean(1, isAvailable);
+        pstmt.setLong(2, id);
+
+        try {
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+
+        }
+    }
+
     public void updateMovie(Movie request) throws Exception {
         String sql = """
                 UPDATE tb_movies

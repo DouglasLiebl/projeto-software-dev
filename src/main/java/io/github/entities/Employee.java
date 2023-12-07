@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Getter @Setter @SuperBuilder
@@ -13,6 +14,6 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 public class Employee extends Person{
 
-    private Double salary;
+    private BigDecimal salary;
     private OffsetDateTime hireDate;
 }

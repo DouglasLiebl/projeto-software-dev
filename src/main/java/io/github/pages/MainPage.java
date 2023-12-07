@@ -187,6 +187,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenuItemAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugarActionPerformed
         CreateLoanPage loanPage = new CreateLoanPage();
         loanPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuItemAlugarActionPerformed
 
     /**

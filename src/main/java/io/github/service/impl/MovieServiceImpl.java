@@ -52,5 +52,10 @@ public class MovieServiceImpl implements MovieService {
         repository.deleteMovie(id);
     }
 
+    @Override
+    public void updateMovieStatus(Long id, Boolean isAvailable) throws Exception {
+        repository.updateMovieStatus(id, isAvailable);
+    }
+
 
 }
