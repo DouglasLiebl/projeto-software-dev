@@ -33,6 +33,7 @@ public class MainPage extends javax.swing.JFrame {
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemFilme = new javax.swing.JMenuItem();
         jMenuItemCliente = new javax.swing.JMenuItem();
+        jMenuItemFuncionario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemDadosCliente = new javax.swing.JMenuItem();
         jMenuItemDisponibilidade = new javax.swing.JMenuItem();
@@ -87,6 +88,15 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItemCliente);
+
+        jMenuItemFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-pequena-direita.png"))); // NOI18N
+        jMenuItemFuncionario.setText("Funcionário");
+        jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemFuncionario);
 
         jMenuBar1.add(jMenuCadastro);
 
@@ -190,6 +200,12 @@ public class MainPage extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItemAlugarActionPerformed
 
+    private void jMenuItemFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioActionPerformed
+        CreateEmployeePage employeePage = new CreateEmployeePage();
+        employeePage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +254,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemDadosCliente;
     private javax.swing.JMenuItem jMenuItemDisponibilidade;
     private javax.swing.JMenuItem jMenuItemFilme;
+    private javax.swing.JMenuItem jMenuItemFuncionario;
     private keeptoo.KGradientPanel kGradientPanel6;
     // End of variables declaration//GEN-END:variables
 }
