@@ -177,6 +177,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
         ClientRegisterPage registerPage = new ClientRegisterPage();
         registerPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     private void jMenuAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAlugarActionPerformed

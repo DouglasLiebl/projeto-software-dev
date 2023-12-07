@@ -19,25 +19,25 @@ public class MovieServiceImpl implements MovieService {
 
     @SneakyThrows
     @Override
-    public List<Movie> getAll() {
+    public List<MovieDTO> getAll() {
 
         return repository.getAll();
     }
 
     @Override
     public MovieDTO findByName(String name) throws Exception {
-        return MovieDTO.of(repository.getMovieByName(name));
+        return repository.getMovieByName(name);
     }
 
 
     @Override
     public MovieDTO getMovieById(Long id) throws Exception {
-        return MovieDTO.of(repository.getMovieById(id));
+        return repository.getMovieById(id);
     }
 
     @Override
     public MovieDTO getMovieByIdAndIsAvailable(Long id) throws Exception{
-        return MovieDTO.of(repository.getMovieByIdAndIsAvailable(id));
+        return repository.getMovieByIdAndIsAvailable(id);
     }
 
     @Override

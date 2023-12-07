@@ -4,11 +4,14 @@
  */
 package io.github.pages;
 
+import io.github.dto.ClientDTO;
 import io.github.entities.Client;
+import io.github.entities.Person;
 import io.github.pages.generalPopUp.Message;
 import io.github.pages.generalPopUp.glass.GlassPanePopup;
 import io.github.service.ClientService;
 import io.github.service.impl.ClientServiceImpl;
+import org.postgresql.util.PSQLException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,128 +41,105 @@ public class ClientRegisterPage extends javax.swing.JFrame {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabelCadastrarFilme = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jLabelNome = new javax.swing.JLabel();
-        jButtonSave = new javax.swing.JButton();
-        jButtonCancel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldCPF = new javax.swing.JTextField();
-        button1 = new io.github.pages.button.Button();
+        textFieldNome = new io.github.pages.textField.TextField();
+        buttonCancelar = new io.github.pages.button.Button();
+        buttonSalvar = new io.github.pages.button.Button();
+        buttonLimpar = new io.github.pages.button.Button();
+        textFieldEmail = new io.github.pages.textField.TextField();
+        textFieldCpf = new io.github.pages.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(500, 200));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(885, 542));
+        setResizable(false);
 
-        kGradientPanel1.setkEndColor(new java.awt.Color(153, 153, 255));
-        kGradientPanel1.setkStartColor(new java.awt.Color(0, 204, 204));
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 0, 0));
+        kGradientPanel1.setkStartColor(new java.awt.Color(204, 204, 204));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(760, 460));
 
-        jLabelCadastrarFilme.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabelCadastrarFilme.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
         jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
         jLabelCadastrarFilme.setText("Cadastrar Cliente");
 
-        jTextFieldNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        textFieldNome.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldNome.setLabelText("Nome");
 
-        jLabelNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabelNome.setText("Nome:");
-
-        jButtonSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonSave.setText("Salvar");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.setFocusPainted(false);
+        buttonCancelar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                buttonCancelarActionPerformed(evt);
             }
         });
 
-        jButtonCancel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonCancel.setText("Cancelar");
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.setFocusPainted(false);
+        buttonSalvar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
+                buttonSalvarActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setLabelFor(jTextFieldEmail);
-        jLabel1.setText("Email:");
-
-        jTextFieldEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText("CPF");
-
-        jTextFieldCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        button1.setText("Limpar Campos");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        buttonLimpar.setText("Limpar Campos");
+        buttonLimpar.setFocusPainted(false);
+        buttonLimpar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                buttonLimparActionPerformed(evt);
             }
         });
+
+        textFieldEmail.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldEmail.setLabelText("Email");
+
+        textFieldCpf.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldCpf.setLabelText("CPF");
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabelCadastrarFilme))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(407, 407, 407)
-                        .addComponent(jButtonCancel)))
-                .addContainerGap(266, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jButtonSave)
-                        .addGap(81, 81, 81)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNome)
-                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNome)
-                            .addComponent(jTextFieldEmail)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(94, 94, 94))
+                                .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
+                                .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelCadastrarFilme)
+                            .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabelCadastrarFilme)
-                .addGap(33, 33, 33)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNome))
-                .addGap(24, 24, 24)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(142, 142, 142)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonSave)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonCancel))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,54 +147,88 @@ public class ClientRegisterPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        this.dispose();
+        mainPage.setVisible(true);
+    }//GEN-LAST:event_buttonCancelarActionPerformed
 
-    }//GEN-LAST:event_jButtonCancelActionPerformed
-
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        ClientService service = new ClientServiceImpl();
-
-        Client request = Client.builder()
-                .name(jTextFieldNome.getText())
-                .email(jTextFieldEmail.getText())
-                .cpf(jTextFieldCPF.getText())
-                .build();
-
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         try {
+            stringValidation(textFieldNome.getText());
+
+            stringValidation(textFieldEmail.getText());
+            if (!textFieldEmail.getText().contains("@") || textFieldEmail.getText().contains(" ")) throw new Exception("Email inválido.");;
+
+            cpfValidation(textFieldCpf.getText());
+            if (textFieldCpf.getText().length() != 11) throw new Exception("CPF inválido.");
+
+            ClientDTO request = ClientDTO.builder()
+                    .name(textFieldNome.getText())
+                    .email(textFieldEmail.getText())
+                    .cpf(textFieldCpf.getText())
+                    .build();
+
             service.registerClient(request);
         } catch (Exception e) {
-
+            if (e instanceof PSQLException) showPopUp("Cliente registrado com sucesso!", "Operação bem sucedida:");
+            else showPopUp(e.getMessage(), "Erro:");
+            buttonLimparActionPerformed(evt);
         }
-    }//GEN-LAST:event_jButtonSaveActionPerformed
+    }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
+        textFieldNome.setText("");
+        textFieldEmail.setText("");
+        textFieldCpf.setText("");
+    }//GEN-LAST:event_buttonLimparActionPerformed
+
+    private static void cpfValidation(String cpf) throws Exception {
+        if (cpf.isBlank()) throw new Exception("O Campo CPF não pode ser em branco.");
+
+        String[] digits = cpf.split("");
+
+        for (String digit: digits) {
+            try {
+                Integer.parseInt(digit);
+            } catch (Exception e) {
+                throw new Exception("CPF não pode conter letras ou caracteres especiais.");
+            }
+        }
+    }
+
+    private static void stringValidation(String request) throws Exception {
+        if (request.isEmpty()) throw new Exception("Nome e email não podem estar em branco.");
+        if (request.isBlank()) throw new Exception("Nome e email não podem ser vazios.");
+        if (request.equals("null")) throw new Exception("Nome e email não podem ser nulos");
+    }
+
+    private void showPopUp(String message, String title) {
         Message obj = new Message();
-        obj.setMessage("Teste message");
-        obj.setTitle("Test title");
+        obj.setMessage(message);
+        obj.setTitle(title);
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
                 GlassPanePopup.closePopupLast();
             }
         });
         GlassPanePopup.showPopup(obj);
-    }//GEN-LAST:event_button1ActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -252,16 +266,16 @@ public class ClientRegisterPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private io.github.pages.button.Button button1;
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonSave;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private io.github.pages.button.Button buttonCancelar;
+    private io.github.pages.button.Button buttonLimpar;
+    private io.github.pages.button.Button buttonSalvar;
     private javax.swing.JLabel jLabelCadastrarFilme;
-    private javax.swing.JLabel jLabelNome;
-    private javax.swing.JTextField jTextFieldCPF;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldNome;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private io.github.pages.textField.TextField textFieldCpf;
+    private io.github.pages.textField.TextField textFieldEmail;
+    private io.github.pages.textField.TextField textFieldNome;
     // End of variables declaration//GEN-END:variables
+
+    private MainPage mainPage = new MainPage();
+    private ClientService service = new ClientServiceImpl();
 }

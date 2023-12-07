@@ -271,7 +271,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
 
        } catch (Exception e) {
            if (e instanceof NumberFormatException) showPopUp("A duração do filme aceita apenas números.", "Erro:");
-           if (e instanceof NullPointerException) showPopUp("O campo Gênero e Classificação devem ter valores selecionados.", "Erro:");
+           else if (e instanceof NullPointerException) showPopUp("O campo Gênero e Classificação devem ter valores selecionados.", "Erro:");
            else showPopUp(e.getMessage(), "Erro:");
        }
     }//GEN-LAST:event_buttonSalvarActionPerformed

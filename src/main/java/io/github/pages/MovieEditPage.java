@@ -7,8 +7,7 @@ package io.github.pages;
 import io.github.dto.MovieDTO;
 import io.github.entities.Movie;
 import io.github.pages.dateChooser.DateChooser;
-import io.github.pages.deletePopUp.message.MessageDialog;
-import io.github.pages.optionPane.OptionPane;
+import io.github.pages.deletePopUp.DeleteMessage;
 import io.github.pages.generalPopUp.Message;
 import io.github.pages.generalPopUp.glass.GlassPanePopup;
 import io.github.service.MovieService;
@@ -312,15 +311,8 @@ public class MovieEditPage extends javax.swing.JFrame {
             else showPopUp(e.getMessage(), "Erro");
 
             buttonLimparActionPerformed(evt);
-            disableButtons();
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
-
-    private void OptionPane(String message) {
-        var pane = new OptionPane();
-        pane.setMessage(message);
-        pane.setVisible(true);
-    }
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
         textFieldNome.setText("");
@@ -330,6 +322,9 @@ public class MovieEditPage extends javax.swing.JFrame {
         textField1.setText("");
         comboboxClass.setSelectedIndex(-1);
         comboboxGenero.setSelectedIndex(-1);
+        textFieldId.setText("");
+
+        disableButtons();
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void disableButtons() {
@@ -364,16 +359,11 @@ public class MovieEditPage extends javax.swing.JFrame {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
             if (textFieldNome.getText().isBlank()) throw new Exception("Você precisa buscar pelo filme primeiro!");
-            MessageDialog box = new MessageDialog(this);
-            box.showMessage("Deletar o filme?", "Todos dados relacionados ao filme serão apagados.");
-
-            if (box.getMessageType() == MessageDialog.MessageType.OK) {
-                movieService.delete(Long.parseLong(textFieldId.getText()));
-            }
+            showDeletePopUp("Tem certeza que deseja deleter? \nTodos os dados serão apagados.", "Deletar.");
 
         } catch (Exception e) {
-            if (e instanceof PSQLException) showPopUp("Filme deletado com sucesso!", "Operação bem sucedida:");
             showPopUp(e.getMessage(), "Erro:");
+            buttonLimparActionPerformed(evt);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -395,6 +385,30 @@ public class MovieEditPage extends javax.swing.JFrame {
             showPopUp(e.getMessage(), "Erro:");
         }
     }//GEN-LAST:event_buttonBuscarActionPerformed
+
+    public void confirmDelete(Long id) throws Exception {
+        movieService.delete(id);
+    }
+
+    private void showDeletePopUp(String message, String title) {
+        DeleteMessage obj = new DeleteMessage();
+        obj.setMessage(message);
+        obj.setTitle(title);
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    confirmDelete(Long.parseLong(textFieldId.getText()));
+                } catch (Exception e) {
+                    GlassPanePopup.closePopupLast();
+                    showPopUp("Filme deletado com sucesso!", "Operação bem sucedida:");
+                    buttonLimparActionPerformed(ae);
+                }
+
+            }
+        });
+        GlassPanePopup.showPopup(obj);
+    }
 
     private void showPopUp(String message, String title) {
         Message obj = new Message();

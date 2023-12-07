@@ -1,7 +1,10 @@
 package io.github.repository;
 
 import io.github.configuration.DatabaseConnection;
+import io.github.dto.ClientDTO;
 import io.github.entities.Client;
+import org.postgresql.util.PSQLException;
+import org.postgresql.util.ServerErrorMessage;
 
 import java.sql.*;
 
@@ -18,10 +21,16 @@ public class ClientRepository {
         pstmt.setString(2, client.getEmail());
         pstmt.setString(3, client.getCpf());
 
-        pstmt.executeQuery();
+        try{
+            pstmt.executeQuery();
+        } catch (Exception e) {
+            if (e.getMessage().contains("tb_clients_cpf_key")) throw new Exception("CPF já cadastrado.");
+            if (e.getMessage().contains("tb_clients_email_key")) throw new Exception("Email já cadastrado.");
+            else throw new PSQLException(new ServerErrorMessage(e.getMessage()));
+        }
     }
 
-    public Client getClientByEmail(String email) throws Exception {
+    public ClientDTO getClientByEmail(String email) throws Exception {
         String sql = "SELECT * FROM tb_clients WHERE email = ?";
 
         Connection conn = getConnection();
@@ -39,8 +48,8 @@ public class ClientRepository {
         return new DatabaseConnection().getConnection();
     }
 
-    private static Client getBuild(ResultSet rs) throws SQLException {
-        return Client.builder()
+    private static ClientDTO getBuild(ResultSet rs) throws SQLException {
+        return ClientDTO.builder()
                 .id(rs.getLong("id"))
                 .name(rs.getString("name"))
                 .email(rs.getString("email"))

@@ -1,7 +1,6 @@
 package io.github.service;
 
 import io.github.dto.MovieDTO;
-import io.github.entities.Movie;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +9,7 @@ public interface MovieService {
 
     void register(MovieDTO request) throws Exception;
 
-    List<Movie> getAll();
+    List<MovieDTO> getAll();
 
     MovieDTO findByName(String name) throws Exception;
 

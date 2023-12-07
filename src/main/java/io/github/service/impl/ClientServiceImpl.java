@@ -1,5 +1,6 @@
 package io.github.service.impl;
 
+import io.github.dto.ClientDTO;
 import io.github.entities.Client;
 import io.github.repository.ClientRepository;
 import io.github.service.ClientService;
@@ -9,16 +10,15 @@ import java.sql.SQLException;
 
 public class ClientServiceImpl implements ClientService {
 
+    private final ClientRepository repository = new ClientRepository();
 
     @Override
-    public void registerClient(Client client) throws Exception {
-        ClientRepository repository = new ClientRepository();
-        repository.registerClient(client);
+    public void registerClient(ClientDTO client) throws Exception {
+        repository.registerClient(Client.of(client));
     }
 
     @Override
-    public Client getClientByEmail(String email) throws Exception {
-        ClientRepository repository = new ClientRepository();
+    public ClientDTO getClientByEmail(String email) throws Exception {
         return repository.getClientByEmail(email);
     }
 }

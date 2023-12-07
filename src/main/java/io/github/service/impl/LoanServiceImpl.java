@@ -17,10 +17,6 @@ public class LoanServiceImpl implements LoanService {
         var movie = movieService.getMovieById(movieId);
         var client = clientService.getClientByEmail(email);
 
-        Loan request = Loan.builder()
-                .clientId(client)
-                .build();
 
-        repository.createLoan(request);
     }
 }
