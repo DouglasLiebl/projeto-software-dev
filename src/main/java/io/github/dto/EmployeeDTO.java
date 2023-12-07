@@ -13,6 +13,7 @@ public class EmployeeDTO {
 
     private Long id;
     private String name;
+    private String cpf;
     private BigDecimal salary;
     private OffsetDateTime hireDate;
 
@@ -20,6 +21,7 @@ public class EmployeeDTO {
         return EmployeeDTO.builder()
                 .id(request.getId())
                 .name(request.getName())
+                .cpf(request.getCpf())
                 .salary(request.getSalary())
                 .hireDate(request.getHireDate())
                 .build();

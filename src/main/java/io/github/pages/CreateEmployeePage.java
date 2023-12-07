@@ -45,6 +45,7 @@ public class CreateEmployeePage extends javax.swing.JFrame {
         buttonSalvar = new io.github.pages.button.Button();
         buttonLimpar = new io.github.pages.button.Button();
         textFieldSalario = new io.github.pages.textField.TextField();
+        textFieldCpf = new io.github.pages.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(500, 200));
@@ -92,6 +93,9 @@ public class CreateEmployeePage extends javax.swing.JFrame {
         textFieldSalario.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         textFieldSalario.setLabelText("Salário");
 
+        textFieldCpf.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldCpf.setLabelText("CPF");
+
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
         kGradientPanel3Layout.setHorizontalGroup(
@@ -111,7 +115,9 @@ public class CreateEmployeePage extends javax.swing.JFrame {
                             .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(72, Short.MAX_VALUE))
                     .addGroup(kGradientPanel3Layout.createSequentialGroup()
-                        .addComponent(textFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textFieldCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textFieldSalario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         kGradientPanel3Layout.setVerticalGroup(
@@ -123,7 +129,9 @@ public class CreateEmployeePage extends javax.swing.JFrame {
                 .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(textFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCancelar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,16 +144,16 @@ public class CreateEmployeePage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(26, 26, 26)
                 .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,9 +169,13 @@ public class CreateEmployeePage extends javax.swing.JFrame {
             stringValidation(textFieldNome.getText());
             if (textFieldNome.getText().isBlank() || textFieldSalario.getText().isBlank()) throw new Exception("Ambos campos são obrigatórios.");
 
+            cpfValidation(textFieldCpf.getText());
+            if (textFieldCpf.getText().length() != 11) throw new Exception("CPF inválido.");
+
             EmployeeDTO employee = EmployeeDTO.builder()
                     .name(textFieldNome.getText())
-                    .salary(BigDecimal.valueOf(Long.parseLong(textFieldSalario.getText())))
+                    .cpf(textFieldCpf.getText())
+                    .salary(BigDecimal.valueOf(Double.parseDouble(textFieldSalario.getText())))
                     .build();
 
             service.register(employee);
@@ -175,9 +187,23 @@ public class CreateEmployeePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
+    private static void cpfValidation(String cpf) throws Exception {
+        if (cpf.isBlank()) throw new Exception("O Campo CPF não pode ser em branco.");
+
+        String[] digits = cpf.split("");
+
+        for (String digit: digits) {
+            try {
+                Integer.parseInt(digit);
+            } catch (Exception e) {
+                throw new Exception("CPF não pode conter letras ou caracteres especiais.");
+            }
+        }
+    }
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
         textFieldNome.setText("");
         textFieldSalario.setText("");
+        textFieldCpf.setText("");
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private static void stringValidation(String request) throws Exception {
@@ -239,6 +265,7 @@ public class CreateEmployeePage extends javax.swing.JFrame {
     private io.github.pages.button.Button buttonSalvar;
     private javax.swing.JLabel jLabelCadastrarFilme2;
     private keeptoo.KGradientPanel kGradientPanel3;
+    private io.github.pages.textField.TextField textFieldCpf;
     private io.github.pages.textField.TextField textFieldNome;
     private io.github.pages.textField.TextField textFieldSalario;
     // End of variables declaration//GEN-END:variables

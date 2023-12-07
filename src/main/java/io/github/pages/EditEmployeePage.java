@@ -4,27 +4,30 @@
  */
 package io.github.pages;
 
-import io.github.dto.ClientDTO;
+import io.github.Main;
+import io.github.dto.EmployeeDTO;
+import io.github.entities.Employee;
 import io.github.pages.deletePopUp.DeleteMessage;
 import io.github.pages.generalPopUp.Message;
 import io.github.pages.generalPopUp.glass.GlassPanePopup;
-import io.github.service.ClientService;
-import io.github.service.impl.ClientServiceImpl;
+import io.github.service.EmployeeService;
+import io.github.service.impl.EmployeeServiceImpl;
 import org.postgresql.util.PSQLException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 /**
  *
  * @author dougl
  */
-public class EditClientPage extends javax.swing.JFrame {
+public class EditEmployeePage extends javax.swing.JFrame {
 
     /**
-     * Creates new form EditClientPage
+     * Creates new form EditEmployeePage
      */
-    public EditClientPage() {
+    public EditEmployeePage() {
         initComponents();
         GlassPanePopup.install(this);
     }
@@ -45,18 +48,15 @@ public class EditClientPage extends javax.swing.JFrame {
         buttonSalvar = new io.github.pages.button.Button();
         buttonLimpar = new io.github.pages.button.Button();
         buttonEditar = new io.github.pages.button.Button();
-        textFieldId = new io.github.pages.textField.TextField();
+        textFieldCpf = new io.github.pages.textField.TextField();
         buttonBuscar = new io.github.pages.button.Button();
         buttonDelete = new io.github.pages.button.Button();
-        textFieldNewEmail = new io.github.pages.textField.TextField();
-        textFieldCpf = new io.github.pages.textField.TextField();
-        textField1 = new io.github.pages.textField.TextField();
-
-        textField1.setVisible(false);
+        textFieldSalario = new io.github.pages.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(500, 200));
         setUndecorated(true);
+        setResizable(false);
 
         kGradientPanel1.setkEndColor(new java.awt.Color(0, 0, 0));
         kGradientPanel1.setkStartColor(new java.awt.Color(204, 204, 204));
@@ -64,7 +64,7 @@ public class EditClientPage extends javax.swing.JFrame {
 
         jLabelCadastrarFilme.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
         jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
-        jLabelCadastrarFilme.setText("Editar Cliente");
+        jLabelCadastrarFilme.setText("Editar Funcionário");
 
         textFieldNome.setEnabled(false);
         textFieldNome.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
@@ -106,8 +106,8 @@ public class EditClientPage extends javax.swing.JFrame {
             }
         });
 
-        textFieldId.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        textFieldId.setLabelText("Email");
+        textFieldCpf.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldCpf.setLabelText("CPF");
 
         buttonBuscar.setFocusPainted(false);
         buttonBuscar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
@@ -127,13 +127,9 @@ public class EditClientPage extends javax.swing.JFrame {
             }
         });
 
-        textFieldNewEmail.setEnabled(false);
-        textFieldNewEmail.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        textFieldNewEmail.setLabelText("Novo email");
-
-        textFieldCpf.setEnabled(false);
-        textFieldCpf.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        textFieldCpf.setLabelText("CPF");
+        textFieldSalario.setEnabled(false);
+        textFieldSalario.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldSalario.setLabelText("Salário");
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -156,14 +152,10 @@ public class EditClientPage extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel1Layout.createSequentialGroup()
-                            .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(textFieldNewEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textFieldSalario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -174,16 +166,12 @@ public class EditClientPage extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(textFieldNewEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(textFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -207,8 +195,8 @@ public class EditClientPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,72 +209,50 @@ public class EditClientPage extends javax.swing.JFrame {
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         try {
-            if (textFieldNome.getText().isBlank()) throw new Exception("Você deve buscar pelo cliente primeiro!");
+            if (textFieldNome.getText().isBlank()) throw new Exception("Você deve buscar pelo funcionário primeiro!");
             stringValidation(textFieldNome.getText());
+            stringValidation(textFieldSalario.getText());
 
-            stringValidation(textFieldNewEmail.getText());
-            if (!textFieldNewEmail.getText().contains("@") || textFieldNewEmail.getText().contains(" ")) throw new Exception("Email inválido.");;
-
-            cpfValidation(textFieldCpf.getText());
-            if (textFieldCpf.getText().length() != 11) throw new Exception("CPF inválido.");
-
-            ClientDTO request = ClientDTO.builder()
+            EmployeeDTO request = EmployeeDTO.builder()
                     .name(textFieldNome.getText())
-                    .email(textFieldNewEmail.getText())
+                    .salary(BigDecimal.valueOf(Double.parseDouble(textFieldSalario.getText())))
                     .cpf(textFieldCpf.getText())
                     .build();
 
-            request.setId(Long.parseLong(textField1.getText()));
             service.update(request);
 
         } catch (Exception e) {
-            if (e instanceof PSQLException) showPopUp("Cliente editado com sucesso!", "Operação bem sucedida:");
+            if (e instanceof NumberFormatException) showPopUp("O campo salário aceita apenas números.", "Erro:");
+            else if (e instanceof PSQLException) showPopUp("Funcionário editado com sucesso!", "Operação bem sucedida:");
             else showPopUp(e.getMessage(), "Erro");
             buttonLimparActionPerformed(evt);
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private static void cpfValidation(String cpf) throws Exception {
-        if (cpf.isBlank()) throw new Exception("O Campo CPF não pode ser em branco.");
-
-        String[] digits = cpf.split("");
-
-        for (String digit: digits) {
-            try {
-                Integer.parseInt(digit);
-            } catch (Exception e) {
-                throw new Exception("CPF não pode conter letras ou caracteres especiais.");
-            }
-        }
-    }
-
     private static void stringValidation(String request) throws Exception {
-        if (request.isEmpty()) throw new Exception("Nome e email não podem estar em branco.");
-        if (request.isBlank()) throw new Exception("Nome e email não podem ser vazios.");
-        if (request.equals("null")) throw new Exception("Nome e email não podem ser nulos");
+        if (request.isEmpty()) throw new Exception("Nome e salário não podem estar em branco.");
+        if (request.isBlank()) throw new Exception("Nome e salário não podem ser vazios.");
+        if (request.equals("null")) throw new Exception("Nome e salário não podem ser nulos");
     }
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
         textFieldNome.setText("");
-        textFieldNewEmail.setText("");
+        textFieldSalario.setText("");
         textFieldCpf.setText("");
-        textFieldId.setText("");
 
         disableButtons();
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void disableButtons() {
-        textFieldNewEmail.setEnabled(false);
         textFieldNome.setEnabled(false);
-        textFieldCpf.setEnabled(false);
+        textFieldSalario.setEnabled(false);
     }
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         try {
-            if (textFieldId.getText().isBlank()) throw new Exception("Você deve buscar pelo cliente primeiro!");
+            if (textFieldCpf.getText().isBlank()) throw new Exception("Você deve buscar pelo funcionário primeiro!");
 
             textFieldNome.setEnabled(true);
-            textFieldNewEmail.setEnabled(true);
-            textFieldCpf.setEnabled(true);
+            textFieldSalario.setEnabled(true);
         } catch (Exception e) {
             showPopUp(e.getMessage(), "Erro:");
         }
@@ -294,14 +260,11 @@ public class EditClientPage extends javax.swing.JFrame {
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         try {
-            if (textFieldId.getText().isBlank()) throw new Exception("Você precisa informar o email do cliente primeiro!");
+            if (textFieldCpf.getText().isBlank()) throw new Exception("Você precisa informar o cpf do funcionário primeiro!");
 
-            var client = service.getClientByEmail(textFieldId.getText());
-
-            textFieldNome.setText(client.getName());
-            textFieldCpf.setText(client.getCpf());
-            textFieldNewEmail.setText(client.getEmail());
-            textField1.setText(String.valueOf(client.getId()));
+            var employee = service.getEmployeeByCpf(textFieldCpf.getText());
+            textFieldSalario.setText(employee.getSalary().toString());
+            textFieldNome.setText(employee.getName());
         } catch (Exception e) {
             showPopUp(e.getMessage(), "Erro:");
         }
@@ -309,7 +272,7 @@ public class EditClientPage extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
-            if (textFieldNome.getText().isBlank()) throw new Exception("Você precisa buscar pelo cliente primeiro!");
+            if (textFieldNome.getText().isBlank()) throw new Exception("Você precisa buscar pelo funcionário primeiro!");
             showDeletePopUp("Tem certeza que deseja deleter? \nTodos os dados serão apagados.", "Deletar.");
 
         } catch (Exception e) {
@@ -318,8 +281,8 @@ public class EditClientPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    public void confirmDelete(String email) throws Exception {
-        service.delete(email);
+    public void confirmDelete(String cpf) throws Exception {
+        service.delete(cpf);
     }
     private void showDeletePopUp(String message, String title) {
         DeleteMessage obj = new DeleteMessage();
@@ -329,10 +292,10 @@ public class EditClientPage extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    confirmDelete(textFieldId.getText());
+                    confirmDelete(textFieldCpf.getText());
                 } catch (Exception e) {
                     GlassPanePopup.closePopupLast();
-                    showPopUp("Cliente deletado com sucesso!", "Operação bem sucedida:");
+                    showPopUp("Funcionário deletado com sucesso!", "Operação bem sucedida:");
                     buttonLimparActionPerformed(ae);
                 }
 
@@ -370,20 +333,20 @@ public class EditClientPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditClientPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditClientPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditClientPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditClientPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditClientPage().setVisible(true);
+                new EditEmployeePage().setVisible(true);
             }
         });
     }
@@ -397,13 +360,11 @@ public class EditClientPage extends javax.swing.JFrame {
     private io.github.pages.button.Button buttonSalvar;
     private javax.swing.JLabel jLabelCadastrarFilme;
     private keeptoo.KGradientPanel kGradientPanel1;
-    private io.github.pages.textField.TextField textField1;
     private io.github.pages.textField.TextField textFieldCpf;
-    private io.github.pages.textField.TextField textFieldId;
-    private io.github.pages.textField.TextField textFieldNewEmail;
     private io.github.pages.textField.TextField textFieldNome;
+    private io.github.pages.textField.TextField textFieldSalario;
     // End of variables declaration//GEN-END:variables
 
     private MainPage mainPage = new MainPage();
-    private final ClientService service = new ClientServiceImpl();
+    private EmployeeService service = new EmployeeServiceImpl();
 }

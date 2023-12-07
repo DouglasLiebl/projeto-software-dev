@@ -40,6 +40,7 @@ public class MainPage extends javax.swing.JFrame {
         jMenuAtualizar = new javax.swing.JMenu();
         jMenuFilme = new javax.swing.JMenuItem();
         jMenuCliente = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuAlugar = new javax.swing.JMenu();
         jMenuItemAlugar = new javax.swing.JMenuItem();
 
@@ -139,6 +140,14 @@ public class MainPage extends javax.swing.JFrame {
         });
         jMenuAtualizar.add(jMenuCliente);
 
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAtualizar.add(jMenuItem1);
+
         jMenuBar1.add(jMenuAtualizar);
 
         jMenuAlugar.setText("Alugar");
@@ -217,6 +226,12 @@ public class MainPage extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuClienteActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        EditEmployeePage employeePage = new EditEmployeePage();
+        employeePage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -260,6 +275,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuCliente;
     private javax.swing.JMenuItem jMenuFilme;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAlugar;
     private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemDadosCliente;

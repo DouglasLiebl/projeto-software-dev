@@ -51,7 +51,6 @@ public class ClientRepository {
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, email);
         pstmt.executeQuery();
-
     }
 
     public void update(Client client) throws Exception {

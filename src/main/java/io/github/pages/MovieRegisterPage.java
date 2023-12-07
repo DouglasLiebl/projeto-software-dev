@@ -259,6 +259,8 @@ public class MovieRegisterPage extends javax.swing.JFrame {
            stringValidation(textFieldNome.getText());
            stringValidation(textFieldDiretor.getText());
 
+           if (textField1.getText().isBlank()) throw new Exception("A date de lançamento não pode estar em branco.");
+
            MovieDTO request = MovieDTO.builder()
                    .name(textFieldNome.getText())
                    .director(textFieldDiretor.getText())

@@ -7,6 +7,7 @@
       <Point value="[500, 200]"/>
     </Property>
     <Property name="undecorated" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -38,8 +39,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="kGradientPanel1" min="-2" pref="509" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Component id="kGradientPanel1" min="-2" pref="508" max="-2" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,12 +62,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="46" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelCadastrarFilme" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="textFieldNome" max="32767" attributes="0"/>
+                      <Component id="jLabelCadastrarFilme" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="textFieldNome" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="buttonSalvar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -79,16 +80,11 @@
                               <Component id="buttonCancelar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="textFieldId" min="-2" pref="331" max="-2" attributes="0"/>
+                              <Component id="textFieldCpf" min="-2" pref="183" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="buttonBuscar" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="textFieldNewEmail" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="textFieldCpf" min="-2" pref="150" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="textField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="textFieldSalario" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="46" max="32767" attributes="0"/>
@@ -102,19 +98,14 @@
                   <Component id="jLabelCadastrarFilme" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="buttonBuscar" min="-2" max="-2" attributes="0"/>
-                      <Component id="textFieldId" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonBuscar" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="textFieldCpf" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="textFieldNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="textFieldNewEmail" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textFieldCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <Component id="textFieldSalario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="106" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="buttonCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -138,7 +129,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/clapperboard.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Editar Cliente"/>
+            <Property name="text" type="java.lang.String" value="Editar Funcion&#xe1;rio"/>
           </Properties>
         </Component>
         <Component class="io.github.pages.textField.TextField" name="textFieldNome">
@@ -198,12 +189,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="io.github.pages.textField.TextField" name="textFieldId">
+        <Component class="io.github.pages.textField.TextField" name="textFieldCpf">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="JetBrains Mono" size="14" style="0"/>
             </Property>
-            <Property name="labelText" type="java.lang.String" value="Email"/>
+            <Property name="labelText" type="java.lang.String" value="CPF"/>
           </Properties>
         </Component>
         <Component class="io.github.pages.button.Button" name="buttonBuscar">
@@ -230,25 +221,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="io.github.pages.textField.TextField" name="textFieldNewEmail">
+        <Component class="io.github.pages.textField.TextField" name="textFieldSalario">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="JetBrains Mono" size="14" style="0"/>
             </Property>
-            <Property name="labelText" type="java.lang.String" value="Novo email"/>
+            <Property name="labelText" type="java.lang.String" value="Sal&#xe1;rio"/>
           </Properties>
-        </Component>
-        <Component class="io.github.pages.textField.TextField" name="textFieldCpf">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="JetBrains Mono" size="14" style="0"/>
-            </Property>
-            <Property name="labelText" type="java.lang.String" value="CPF"/>
-          </Properties>
-        </Component>
-        <Component class="io.github.pages.textField.TextField" name="textField1">
         </Component>
       </SubComponents>
     </Container>
