@@ -29,6 +29,8 @@ public class MainPage extends javax.swing.JFrame {
     private void initComponents() {
 
         kGradientPanel6 = new keeptoo.KGradientPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemFilme = new javax.swing.JMenuItem();
@@ -50,15 +52,35 @@ public class MainPage extends javax.swing.JFrame {
         kGradientPanel6.setkEndColor(new java.awt.Color(153, 153, 255));
         kGradientPanel6.setkStartColor(new java.awt.Color(0, 204, 204));
 
+        jTable1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout kGradientPanel6Layout = new javax.swing.GroupLayout(kGradientPanel6);
         kGradientPanel6.setLayout(kGradientPanel6Layout);
         kGradientPanel6Layout.setHorizontalGroup(
             kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(kGradientPanel6Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         kGradientPanel6Layout.setVerticalGroup(
             kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel6Layout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         jMenuBar1.setBorder(null);
@@ -282,6 +304,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemDisponibilidade;
     private javax.swing.JMenuItem jMenuItemFilme;
     private javax.swing.JMenuItem jMenuItemFuncionario;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private keeptoo.KGradientPanel kGradientPanel6;
     // End of variables declaration//GEN-END:variables
 }

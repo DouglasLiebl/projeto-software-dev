@@ -31,19 +31,6 @@ public class MovieRepository {
         pstmt.executeUpdate();
     }
 
-    public MovieDTO getMovieByName(String name) throws SQLException {
-        String sql = "SELECT * FROM tb_movies WHERE name = ?";
-
-        Connection conn = getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, name);
-
-        ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) throw new SQLException("Not Found");
-
-        return getBuild(rs);
-    }
-
     public MovieDTO getMovieById(Long id) throws Exception {
         String sql = "SELECT * FROM tb_movies WHERE id = ?";
 
@@ -53,20 +40,6 @@ public class MovieRepository {
 
         ResultSet rs = pstmt.executeQuery();
         if (!rs.next()) throw new Exception(String.format("Filme não encontrado com o id: %d", id));
-
-        return getBuild(rs);
-    }
-
-    public MovieDTO getMovieByIdAndIsAvailable(Long id) throws Exception {
-        String sql = "SELECT * FROM tb_movies WHERE id = ? AND is_available = true";
-
-        Connection conn = getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setLong(1, id);
-
-        ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) throw new Exception(String.format("Filme não encontrado com o id: %d", id));
-        if (!rs.getBoolean("is_available")) throw new Exception("Filme já alugado");
 
         return getBuild(rs);
     }
