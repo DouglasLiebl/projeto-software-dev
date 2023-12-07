@@ -132,6 +132,11 @@ public class MainPage extends javax.swing.JFrame {
         jMenuCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-pequena-direita.png"))); // NOI18N
         jMenuCliente.setText("Cliente");
+        jMenuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuClienteActionPerformed(evt);
+            }
+        });
         jMenuAtualizar.add(jMenuCliente);
 
         jMenuBar1.add(jMenuAtualizar);
@@ -205,6 +210,12 @@ public class MainPage extends javax.swing.JFrame {
         employeePage.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
+
+    private void jMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClienteActionPerformed
+        EditClientPage editClientPage = new EditClientPage();
+        editClientPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuClienteActionPerformed
 
     /**
      * @param args the command line arguments

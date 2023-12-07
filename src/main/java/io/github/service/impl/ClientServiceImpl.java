@@ -4,9 +4,6 @@ import io.github.dto.ClientDTO;
 import io.github.entities.Client;
 import io.github.repository.ClientRepository;
 import io.github.service.ClientService;
-import lombok.SneakyThrows;
-
-import java.sql.SQLException;
 
 public class ClientServiceImpl implements ClientService {
 
@@ -20,5 +17,17 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO getClientByEmail(String email) throws Exception {
         return repository.getClientByEmail(email);
+    }
+
+    @Override
+    public void delete(String email) throws Exception {
+        repository.delete(email);
+    }
+
+    @Override
+    public void update(ClientDTO request) throws Exception {
+        var client = Client.of(request);
+        client.setId(request.getId());
+        repository.update(client);
     }
 }

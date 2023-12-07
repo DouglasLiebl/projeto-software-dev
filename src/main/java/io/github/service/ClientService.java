@@ -10,4 +10,8 @@ public interface ClientService {
     void registerClient(ClientDTO client) throws Exception;
 
     ClientDTO getClientByEmail(String email) throws Exception;
+
+    void delete(String email) throws Exception;
+
+    void update(ClientDTO request) throws Exception;
 }

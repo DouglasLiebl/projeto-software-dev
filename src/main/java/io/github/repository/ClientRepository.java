@@ -43,6 +43,42 @@ public class ClientRepository {
         return getBuild(rs);
     }
 
+    public void delete(String email) throws Exception {
+        String sql = "DELETE FROM tb_clients WHERE email = ?";
+
+        Connection conn = getConnection();
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, email);
+        pstmt.executeQuery();
+
+    }
+
+    public void update(Client client) throws Exception {
+        String sql = """
+                UPDATE tb_clients
+                SET name = ?,
+                    email = ?,
+                    cpf = ?
+                WHERE id = ?
+                """;
+
+        Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, client.getName());
+        pstmt.setString(2, client.getEmail());
+        pstmt.setString(3, client.getCpf());
+        pstmt.setLong(4, client.getId());
+
+        try{
+            pstmt.executeQuery();
+        } catch (Exception e) {
+            if (e.getMessage().contains("tb_clients_cpf_key")) throw new Exception("CPF já cadastrado.");
+            if (e.getMessage().contains("tb_clients_email_key")) throw new Exception("Email já cadastrado.");
+            else throw new PSQLException(new ServerErrorMessage(e.getMessage()));
+        }
+    }
+
 
     private static Connection getConnection() {
         return new DatabaseConnection().getConnection();
