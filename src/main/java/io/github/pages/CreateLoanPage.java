@@ -4,9 +4,17 @@
  */
 package io.github.pages;
 
-import io.github.pages.textfield.TextField;
+import io.github.Main;
+import io.github.pages.generalPopUp.Message;
+import io.github.pages.generalPopUp.glass.GlassPanePopup;
+import io.github.pages.textField.TextField;
 import io.github.service.LoanService;
 import io.github.service.impl.LoanServiceImpl;
+import org.postgresql.util.PSQLException;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.management.MonitorInfo;
 
 /**
  *
@@ -19,6 +27,7 @@ public class CreateLoanPage extends javax.swing.JFrame {
      */
     public CreateLoanPage() {
         initComponents();
+        GlassPanePopup.install(this);
     }
 
     /**
@@ -32,94 +41,137 @@ public class CreateLoanPage extends javax.swing.JFrame {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabelCadastrarFilme = new javax.swing.JLabel();
-        jButtonSave = new javax.swing.JButton();
-        jButtonClean = new javax.swing.JButton();
-        jButtonCancel = new javax.swing.JButton();
-        textField1 = new TextField();
-        textField2 = new TextField();
+        buttonCancelar = new io.github.pages.button.Button();
+        buttonSalvar = new io.github.pages.button.Button();
+        buttonLimpar = new io.github.pages.button.Button();
+        textFieldEmail = new io.github.pages.textField.TextField();
+        textFieldID = new io.github.pages.textField.TextField();
+        textFieldDevolver = new io.github.pages.textField.TextField();
+        buttonDevolver = new io.github.pages.button.Button();
+        buttonAlugar = new io.github.pages.button.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(500, 200));
+        setUndecorated(true);
+        setResizable(false);
 
-        kGradientPanel1.setkEndColor(new java.awt.Color(153, 153, 255));
-        kGradientPanel1.setkStartColor(new java.awt.Color(0, 204, 204));
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 0, 0));
+        kGradientPanel1.setkStartColor(new java.awt.Color(204, 204, 204));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(760, 460));
 
-        jLabelCadastrarFilme.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabelCadastrarFilme.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
         jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
         jLabelCadastrarFilme.setText("Alugar Filme");
 
-        jButtonSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonSave.setText("Salvar");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.setFocusPainted(false);
+        buttonCancelar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                buttonCancelarActionPerformed(evt);
             }
         });
 
-        jButtonClean.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonClean.setText("Limpar Campos");
-        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.setFocusPainted(false);
+        buttonSalvar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCleanActionPerformed(evt);
+                buttonSalvarActionPerformed(evt);
             }
         });
 
-        jButtonCancel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonCancel.setText("Cancelar");
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+        buttonLimpar.setText("Limpar Campos");
+        buttonLimpar.setFocusPainted(false);
+        buttonLimpar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
+                buttonLimparActionPerformed(evt);
             }
         });
 
-        textField1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        textField1.setLabelText("Email do Cliente");
+        textFieldEmail.setEnabled(false);
+        textFieldEmail.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldEmail.setLabelText("Email");
 
-        textField2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        textField2.setLabelText("Id Filme");
+        textFieldID.setEnabled(false);
+        textFieldID.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldID.setLabelText("Id Filme");
+
+        textFieldDevolver.setEnabled(false);
+        textFieldDevolver.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldDevolver.setLabelText("Código de devolução");
+
+        buttonDevolver.setText("Devolver");
+        buttonDevolver.setFocusPainted(false);
+        buttonDevolver.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDevolverActionPerformed(evt);
+            }
+        });
+
+        buttonAlugar.setText("Alugar");
+        buttonAlugar.setFocusPainted(false);
+        buttonAlugar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonAlugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlugarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabelCadastrarFilme))
+                        .addComponent(textFieldDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(213, 213, 213)
-                                .addComponent(jButtonClean))
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(jButtonSave)))
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonCancel))
+                                .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
+                                .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelCadastrarFilme))
+                        .addContainerGap(71, Short.MAX_VALUE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                            .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(textFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonAlugar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabelCadastrarFilme)
-                .addGap(45, 45, 45)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonClean)
-                    .addComponent(jButtonSave)
-                    .addComponent(jButtonCancel))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,41 +179,87 @@ public class CreateLoanPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        this.dispose();
+        mainPage.setVisible(true);
+    }//GEN-LAST:event_buttonCancelarActionPerformed
 
-    }//GEN-LAST:event_jButtonCancelActionPerformed
-
-    private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-        textField1.setText("");
-        textField2.setText("");
-    }//GEN-LAST:event_jButtonCleanActionPerformed
-
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        LoanService service = new LoanServiceImpl();
-
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         try {
-            service.createLoan(Long.parseLong(textField1.getText()),
-                    textField2.getText());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButtonSaveActionPerformed
 
+
+
+            if (textFieldEmail.isEnabled()) {
+                if (textFieldEmail.getText().isBlank() || textFieldID.getText().isBlank()) throw new Exception("Os campos necessários não podem estar em branco.");
+                if (!textFieldEmail.getText().contains("@") || textFieldEmail.getText().contains(" ")) throw new Exception("Email inválido.");;
+
+                var email = textFieldEmail.getText();
+                var id = Long.parseLong(textFieldID.getText());
+
+                service.createLoan(id, email);
+            }
+
+            if (textFieldDevolver.isEnabled()) {
+                if (textFieldDevolver.getText().isBlank()) throw new Exception("Os campos necessários não podem estar em branco.");
+                var code = textFieldDevolver.getText();
+                service.updateStatus(code);
+            }
+
+        } catch (Exception e) {
+            if (e instanceof RuntimeException) showPopUp("Filme alugado com sucesso!" + e.getMessage(), "Operação bem sucedida:");
+            else if (e instanceof PSQLException) showPopUp("Filme devolvido com sucesso!", "Operação bem sucedida.");
+            else showPopUp(e.getMessage(), "Erro:");
+            buttonLimparActionPerformed(evt);
+        }
+    }//GEN-LAST:event_buttonSalvarActionPerformed
+
+    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
+        textFieldEmail.setText("");
+        textFieldID.setText("");
+        textFieldDevolver.setText("");
+    }//GEN-LAST:event_buttonLimparActionPerformed
+
+    private void buttonAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlugarActionPerformed
+        textFieldEmail.setEnabled(true);
+        textFieldID.setEnabled(true);
+        textFieldDevolver.setEnabled(false);
+        buttonLimparActionPerformed(evt);
+    }//GEN-LAST:event_buttonAlugarActionPerformed
+
+    private void buttonDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDevolverActionPerformed
+        textFieldDevolver.setEnabled(true);
+        textFieldEmail.setEnabled(false);
+        textFieldID.setEnabled(false);
+        buttonLimparActionPerformed(evt);
+    }//GEN-LAST:event_buttonDevolverActionPerformed
+
+    private void showPopUp(String message, String title) {
+        Message obj = new Message();
+        obj.setMessage(message);
+        obj.setTitle(title);
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                GlassPanePopup.closePopupLast();
+            }
+        });
+        GlassPanePopup.showPopup(obj);
+    }
     /**
      * @param args the command line arguments
      */
@@ -198,13 +296,18 @@ public class CreateLoanPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonClean;
-    private javax.swing.JButton jButtonSave;
+    private io.github.pages.button.Button buttonAlugar;
+    private io.github.pages.button.Button buttonCancelar;
+    private io.github.pages.button.Button buttonDevolver;
+    private io.github.pages.button.Button buttonLimpar;
+    private io.github.pages.button.Button buttonSalvar;
     private javax.swing.JLabel jLabelCadastrarFilme;
     private keeptoo.KGradientPanel kGradientPanel1;
-    private TextField textField1;
-    private TextField textField2;
+    private io.github.pages.textField.TextField textFieldDevolver;
+    private io.github.pages.textField.TextField textFieldEmail;
+    private io.github.pages.textField.TextField textFieldID;
     // End of variables declaration//GEN-END:variables
     private TextField textField;
+    private MainPage mainPage = new MainPage();
+    private LoanService service = new LoanServiceImpl();
 }

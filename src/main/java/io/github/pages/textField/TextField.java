@@ -1,4 +1,4 @@
-package io.github.pages.textfield;
+package io.github.pages.textField;
 
 
 import org.jdesktop.animation.timing.Animator;

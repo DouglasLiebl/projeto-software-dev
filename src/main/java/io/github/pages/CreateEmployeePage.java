@@ -4,28 +4,27 @@
  */
 package io.github.pages;
 
-import io.github.dto.ClientDTO;
-import io.github.entities.Client;
-import io.github.entities.Person;
+import io.github.dto.EmployeeDTO;
 import io.github.pages.generalPopUp.Message;
 import io.github.pages.generalPopUp.glass.GlassPanePopup;
-import io.github.service.ClientService;
-import io.github.service.impl.ClientServiceImpl;
+import io.github.service.EmployeeService;
+import io.github.service.impl.EmployeeServiceImpl;
 import org.postgresql.util.PSQLException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 /**
  *
  * @author dougl
  */
-public class ClientRegisterPage extends javax.swing.JFrame {
+public class CreateEmployeePage extends javax.swing.JFrame {
 
     /**
-     * Creates new form ClientRegisterPage
+     * Creates new form CreateEmployeePage
      */
-    public ClientRegisterPage() {
+    public CreateEmployeePage() {
         initComponents();
         GlassPanePopup.install(this);
     }
@@ -39,39 +38,37 @@ public class ClientRegisterPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kGradientPanel1 = new keeptoo.KGradientPanel();
-        jLabelCadastrarFilme = new javax.swing.JLabel();
+        kGradientPanel3 = new keeptoo.KGradientPanel();
+        jLabelCadastrarFilme2 = new javax.swing.JLabel();
         textFieldNome = new io.github.pages.textField.TextField();
-        buttonCancelar = new io.github.pages.button.Button();
+        buttonCancelar2 = new io.github.pages.button.Button();
         buttonSalvar = new io.github.pages.button.Button();
         buttonLimpar = new io.github.pages.button.Button();
-        textFieldEmail = new io.github.pages.textField.TextField();
+        textFieldSalario = new io.github.pages.textField.TextField();
         textFieldCpf = new io.github.pages.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(500, 200));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(885, 542));
         setResizable(false);
 
-        kGradientPanel1.setkEndColor(new java.awt.Color(0, 0, 0));
-        kGradientPanel1.setkStartColor(new java.awt.Color(204, 204, 204));
-        kGradientPanel1.setPreferredSize(new java.awt.Dimension(760, 460));
+        kGradientPanel3.setkEndColor(new java.awt.Color(0, 0, 0));
+        kGradientPanel3.setkStartColor(new java.awt.Color(204, 204, 204));
+        kGradientPanel3.setPreferredSize(new java.awt.Dimension(760, 460));
 
-        jLabelCadastrarFilme.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
-        jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
-        jLabelCadastrarFilme.setText("Cadastrar Cliente");
+        jLabelCadastrarFilme2.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
+        jLabelCadastrarFilme2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
+        jLabelCadastrarFilme2.setText("Cadastrar Funcionário");
 
         textFieldNome.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         textFieldNome.setLabelText("Nome");
 
-        buttonCancelar.setText("Cancelar");
-        buttonCancelar.setFocusPainted(false);
-        buttonCancelar.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancelar2.setText("Cancelar");
+        buttonCancelar2.setFocusPainted(false);
+        buttonCancelar2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        buttonCancelar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCancelarActionPerformed(evt);
+                buttonCancelar2ActionPerformed(evt);
             }
         });
 
@@ -93,50 +90,50 @@ public class ClientRegisterPage extends javax.swing.JFrame {
             }
         });
 
-        textFieldEmail.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        textFieldEmail.setLabelText("Email");
+        textFieldSalario.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        textFieldSalario.setLabelText("Salário");
 
         textFieldCpf.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         textFieldCpf.setLabelText("CPF");
 
-        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
-        kGradientPanel1.setLayout(kGradientPanel1Layout);
-        kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
+        kGradientPanel3.setLayout(kGradientPanel3Layout);
+        kGradientPanel3Layout.setHorizontalGroup(
+            kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel3Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel3Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(kGradientPanel3Layout.createSequentialGroup()
                                 .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
-                                .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelCadastrarFilme)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
+                                .addComponent(buttonCancelar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelCadastrarFilme2)
                             .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(71, Short.MAX_VALUE))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(72, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel3Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textFieldCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textFieldSalario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+        kGradientPanel3Layout.setVerticalGroup(
+            kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabelCadastrarFilme)
+                .addComponent(jLabelCadastrarFilme2)
                 .addGap(39, 39, 39)
                 .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(textFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCancelar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
@@ -147,55 +144,48 @@ public class ClientRegisterPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+    private void buttonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelar2ActionPerformed
         this.dispose();
         mainPage.setVisible(true);
-    }//GEN-LAST:event_buttonCancelarActionPerformed
+    }//GEN-LAST:event_buttonCancelar2ActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         try {
             stringValidation(textFieldNome.getText());
-
-            stringValidation(textFieldEmail.getText());
-            if (!textFieldEmail.getText().contains("@") || textFieldEmail.getText().contains(" ")) throw new Exception("Email inválido.");;
+            if (textFieldNome.getText().isBlank() || textFieldSalario.getText().isBlank()) throw new Exception("Ambos campos são obrigatórios.");
 
             cpfValidation(textFieldCpf.getText());
             if (textFieldCpf.getText().length() != 11) throw new Exception("CPF inválido.");
 
-            ClientDTO request = ClientDTO.builder()
+            EmployeeDTO employee = EmployeeDTO.builder()
                     .name(textFieldNome.getText())
-                    .email(textFieldEmail.getText())
                     .cpf(textFieldCpf.getText())
+                    .salary(BigDecimal.valueOf(Double.parseDouble(textFieldSalario.getText())))
                     .build();
 
-            service.registerClient(request);
+            service.register(employee);
         } catch (Exception e) {
-            if (e instanceof PSQLException) showPopUp("Cliente registrado com sucesso!", "Operação bem sucedida:");
+            if (e instanceof PSQLException) showPopUp("Funcionário registrado com sucesso!", "Operação bem sucedida:");
+            else if (e instanceof NumberFormatException) showPopUp("O campo salário aceita apenas números.", "Erro:");
             else showPopUp(e.getMessage(), "Erro:");
             buttonLimparActionPerformed(evt);
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
-
-    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
-        textFieldNome.setText("");
-        textFieldEmail.setText("");
-        textFieldCpf.setText("");
-    }//GEN-LAST:event_buttonLimparActionPerformed
 
     private static void cpfValidation(String cpf) throws Exception {
         if (cpf.isBlank()) throw new Exception("O Campo CPF não pode ser em branco.");
@@ -210,10 +200,15 @@ public class ClientRegisterPage extends javax.swing.JFrame {
             }
         }
     }
+    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
+        textFieldNome.setText("");
+        textFieldSalario.setText("");
+        textFieldCpf.setText("");
+    }//GEN-LAST:event_buttonLimparActionPerformed
 
     private static void stringValidation(String request) throws Exception {
-        if (request.isEmpty()) throw new Exception("Nome e email não podem estar em branco.");
-        if (request.isBlank()) throw new Exception("Nome e email não podem ser vazios.");
+        if (request.isEmpty()) throw new Exception("Nome não podem estar em branco.");
+        if (request.isBlank()) throw new Exception("Nome não podem ser vazios.");
         if (request.equals("null")) throw new Exception("Nome e email não podem ser nulos");
     }
 
@@ -229,7 +224,6 @@ public class ClientRegisterPage extends javax.swing.JFrame {
         });
         GlassPanePopup.showPopup(obj);
     }
-
     /**
      * @param args the command line arguments
      */
@@ -247,35 +241,35 @@ public class ClientRegisterPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientRegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientRegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientRegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientRegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEmployeePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientRegisterPage().setVisible(true);
+                new CreateEmployeePage().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private io.github.pages.button.Button buttonCancelar;
+    private io.github.pages.button.Button buttonCancelar2;
     private io.github.pages.button.Button buttonLimpar;
     private io.github.pages.button.Button buttonSalvar;
-    private javax.swing.JLabel jLabelCadastrarFilme;
-    private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JLabel jLabelCadastrarFilme2;
+    private keeptoo.KGradientPanel kGradientPanel3;
     private io.github.pages.textField.TextField textFieldCpf;
-    private io.github.pages.textField.TextField textFieldEmail;
     private io.github.pages.textField.TextField textFieldNome;
+    private io.github.pages.textField.TextField textFieldSalario;
     // End of variables declaration//GEN-END:variables
 
-    private MainPage mainPage = new MainPage();
-    private ClientService service = new ClientServiceImpl();
+    private final MainPage mainPage = new MainPage();
+    private final EmployeeService service = new EmployeeServiceImpl();
 }

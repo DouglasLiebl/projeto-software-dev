@@ -33,12 +33,14 @@ public class MainPage extends javax.swing.JFrame {
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemFilme = new javax.swing.JMenuItem();
         jMenuItemCliente = new javax.swing.JMenuItem();
+        jMenuItemFuncionario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemDadosCliente = new javax.swing.JMenuItem();
         jMenuItemDisponibilidade = new javax.swing.JMenuItem();
         jMenuAtualizar = new javax.swing.JMenu();
         jMenuFilme = new javax.swing.JMenuItem();
         jMenuCliente = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuAlugar = new javax.swing.JMenu();
         jMenuItemAlugar = new javax.swing.JMenuItem();
 
@@ -88,6 +90,15 @@ public class MainPage extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jMenuItemCliente);
 
+        jMenuItemFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-pequena-direita.png"))); // NOI18N
+        jMenuItemFuncionario.setText("Funcionário");
+        jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemFuncionario);
+
         jMenuBar1.add(jMenuCadastro);
 
         jMenu1.setText("Consultar");
@@ -122,7 +133,20 @@ public class MainPage extends javax.swing.JFrame {
         jMenuCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-pequena-direita.png"))); // NOI18N
         jMenuCliente.setText("Cliente");
+        jMenuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuClienteActionPerformed(evt);
+            }
+        });
         jMenuAtualizar.add(jMenuCliente);
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAtualizar.add(jMenuItem1);
 
         jMenuBar1.add(jMenuAtualizar);
 
@@ -177,6 +201,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
         ClientRegisterPage registerPage = new ClientRegisterPage();
         registerPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     private void jMenuAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAlugarActionPerformed
@@ -186,7 +211,26 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenuItemAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugarActionPerformed
         CreateLoanPage loanPage = new CreateLoanPage();
         loanPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuItemAlugarActionPerformed
+
+    private void jMenuItemFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioActionPerformed
+        CreateEmployeePage employeePage = new CreateEmployeePage();
+        employeePage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
+
+    private void jMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClienteActionPerformed
+        EditClientPage editClientPage = new EditClientPage();
+        editClientPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuClienteActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        EditEmployeePage employeePage = new EditEmployeePage();
+        employeePage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,11 +275,13 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuCliente;
     private javax.swing.JMenuItem jMenuFilme;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAlugar;
     private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemDadosCliente;
     private javax.swing.JMenuItem jMenuItemDisponibilidade;
     private javax.swing.JMenuItem jMenuItemFilme;
+    private javax.swing.JMenuItem jMenuItemFuncionario;
     private keeptoo.KGradientPanel kGradientPanel6;
     // End of variables declaration//GEN-END:variables
 }
