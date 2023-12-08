@@ -187,7 +187,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                                     .addGap(67, 67, 67)
                                     .addComponent(textFieldDuracao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGap(10, 10, 10))))
-                        .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 38, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
