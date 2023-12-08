@@ -9,13 +9,9 @@ public interface MovieService {
 
     void register(MovieDTO request) throws Exception;
 
-    List<MovieDTO> getAll();
-
-    MovieDTO findByName(String name) throws Exception;
+    List<MovieDTO> getAllLikeName(String name);
 
     MovieDTO getMovieById(Long id) throws SQLException, Exception;
-
-    MovieDTO getMovieByIdAndIsAvailable(Long id) throws Exception;
 
     void update(MovieDTO request) throws Exception;
 

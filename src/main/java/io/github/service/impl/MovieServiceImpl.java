@@ -19,14 +19,8 @@ public class MovieServiceImpl implements MovieService {
 
     @SneakyThrows
     @Override
-    public List<MovieDTO> getAll() {
-
-        return repository.getAll();
-    }
-
-    @Override
-    public MovieDTO findByName(String name) throws Exception {
-        return repository.getMovieByName(name);
+    public List<MovieDTO> getAllLikeName(String name) {
+        return repository.getAll(name);
     }
 
 
@@ -35,10 +29,6 @@ public class MovieServiceImpl implements MovieService {
         return repository.getMovieById(id);
     }
 
-    @Override
-    public MovieDTO getMovieByIdAndIsAvailable(Long id) throws Exception{
-        return repository.getMovieByIdAndIsAvailable(id);
-    }
 
     @Override
     public void update(MovieDTO request) throws Exception {
