@@ -85,7 +85,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(760, 460));
 
         jLabelCadastrarFilme.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
-        jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
+        jLabelCadastrarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo64.png"))); // NOI18N
         jLabelCadastrarFilme.setText("Cadastrar Filme");
 
         textFieldNome.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
@@ -187,7 +187,7 @@ public class MovieRegisterPage extends javax.swing.JFrame {
                                     .addGap(67, 67, 67)
                                     .addComponent(textFieldDuracao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGap(10, 10, 10))))
-                        .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 38, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(

@@ -20,7 +20,7 @@ public class MovieServiceImpl implements MovieService {
     @SneakyThrows
     @Override
     public List<MovieDTO> getAllLikeName(String name) {
-        return repository.getAll();
+        return repository.getAll(name);
     }
 
 

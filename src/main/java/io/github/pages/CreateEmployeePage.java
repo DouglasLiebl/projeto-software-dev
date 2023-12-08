@@ -57,7 +57,7 @@ public class CreateEmployeePage extends javax.swing.JFrame {
         kGradientPanel3.setPreferredSize(new java.awt.Dimension(760, 460));
 
         jLabelCadastrarFilme2.setFont(new java.awt.Font("JetBrains Mono", 0, 24)); // NOI18N
-        jLabelCadastrarFilme2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clapperboard.png"))); // NOI18N
+        jLabelCadastrarFilme2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo64.png"))); // NOI18N
         jLabelCadastrarFilme2.setText("Cadastrar Funcionário");
 
         textFieldNome.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N

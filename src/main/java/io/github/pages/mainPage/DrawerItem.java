@@ -75,7 +75,6 @@ public class DrawerItem extends JButton {
         this.iconTextGap = iconTextGap;
         return this;
     }
-
     public DrawerItem font(Font font) {
         setFont(font);
         return this;

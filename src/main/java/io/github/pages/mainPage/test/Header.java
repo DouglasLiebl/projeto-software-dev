@@ -14,23 +14,23 @@ public class Header extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(89, 168, 255));
+        setBackground(new java.awt.Color(0, 0, 0));
 
         imageAvatar1.setBorderSize(3);
         imageAvatar1.setBorderSpace(2);
         imageAvatar1.setGradientColor1(new java.awt.Color(255, 0, 0));
         imageAvatar1.setGradientColor2(new java.awt.Color(27, 0, 255));
-        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/icon/logo.jpg"))); // NOI18N
+        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("JetBrains Mono", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Javaswingdev.com");
+        jLabel1.setText("Locadora Lock-a-Door");
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(216, 216, 216));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("+855 9998881001");
+        jLabel2.setText("+55 11 8002 4922");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

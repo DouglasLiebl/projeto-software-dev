@@ -44,11 +44,12 @@ public class MovieRepository {
         return getBuild(rs);
     }
 
-    public List<MovieDTO> getAll() throws Exception {
-        String sql = "SELECT * FROM tb_movies";
+    public List<MovieDTO> getAll(String name) throws Exception {
+        String sql = "SELECT * FROM tb_movies WHERE name ILIKE ?";
 
         Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, name + "%");
 
         ResultSet rs = pstmt.executeQuery();
 
