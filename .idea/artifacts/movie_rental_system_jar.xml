@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="movie-rental-system:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/movie_rental_system_jar</output-path>
+    <root id="archive" name="movie-rental-system.jar">
+      <element id="module-output" name="movie-rental-system" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/unknown/binary/KGradientPanel/SNAPSHOT/KGradientPanel-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/java/dev/timingframework/timingframework/1.0/timingframework-1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.7.0/postgresql-42.7.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/miglayout/miglayout-core/5.2/miglayout-core-5.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/miglayout/miglayout-swing/5.2/miglayout-swing-5.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

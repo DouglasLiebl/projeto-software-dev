@@ -16,7 +16,7 @@ public class DatabaseConnection {
         }
 
         try {
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/billingProject?useSSL=false", "postgres", "root");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?useSSL=false", "postgres", "root");
         } catch (SQLException e) {
             e.printStackTrace();
         }
